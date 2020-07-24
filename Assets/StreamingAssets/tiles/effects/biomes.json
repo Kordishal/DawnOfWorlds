@@ -1,0 +1,16 @@
+{
+  "biomes": [
+    {
+      "name": "Tundra",
+      "description": "A cold steppe with permafrost during the cold season."
+    },
+    {
+      "name": "Temperate Grassland",
+      "description": "A temperate steppe with some rainfall."
+    },
+    {
+      "name": "Savannah",
+      "description": "A warm and dry steppe with a few trees."
+    }
+  ]
+}

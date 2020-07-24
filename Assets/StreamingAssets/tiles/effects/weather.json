@@ -1,0 +1,40 @@
+{
+  "effects": [
+    {
+      "name": "Continuous Rain",
+      "description": "In this area it rains almost constantly. Only a few days a year may be without rain. It is rather depressing. And wet."
+    },
+    {
+      "name": "Permanent Fog",
+      "description": "A strange and eerie feeling overcomes anyone who enters this fog. The fog stays at all times."
+    },
+    {
+      "name": "Strong Thunderstorms",
+      "description": "The thunderstorms in this region are very destructive. With powerful lightning and roaring thunder."
+    },
+    {
+      "name": "Monsoon",
+      "description": "The monsoon is a seasonal weather effect. Once a year the area is flooded in rain. The rest of the year is very dry."
+    },
+    {
+      "name": "Strong Blizzard",
+      "description": "Stronger blizzard haunt this area. It is very cold, impossible to navigate with deadly ice shards slicing up any lost souls."
+    },
+    {
+      "name": "Strong Sandstorms",
+      "description": "Stronger sandstorms haunt this area. It is very hot, impossible to navigate with deadly glass shards slicing up any lost souls."
+    },
+    {
+      "name": "Blood Rain",
+      "description": "It rains blood. The blood is of unknown origin. But nobody likes it."
+    },
+    {
+      "name": "Acid Rain",
+      "description": "It rains acid. Very deadly."
+    },
+    {
+      "name": "Extreme Heat Waves",
+      "description": "The area experiences extreme heat waves during the warm seasons."
+    }
+  ]
+}
