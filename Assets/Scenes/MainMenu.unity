@@ -984,6 +984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerEditorPrefab: {fileID: 6332952654820263631, guid: f0e611f37c780438aba4df3e0691e6b0, type: 3}
+  deityEditorPrefab: {fileID: 2178446085044228062, guid: f5889331a3a7fde75a6bdc694e2f2830, type: 3}
   newGame: {fileID: 980879983}
   settings: {fileID: 56750741}
   createDeity: {fileID: 1508233371}

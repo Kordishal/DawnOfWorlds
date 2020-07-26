@@ -6,6 +6,7 @@ namespace Input.Menu
     public class MainMenuControl : MonoBehaviour
     {
         public GameObject playerEditorPrefab;
+        public GameObject deityEditorPrefab;
 
         public Button newGame;
         public Button settings;
@@ -13,12 +14,15 @@ namespace Input.Menu
         public Button quit;
 
         private GameObject _playerEditorPanel;
-
+        private GameObject _deityEditorPanel;
 
         private void Awake()
         {
-            _playerEditorPanel = Instantiate(playerEditorPrefab, transform.parent.parent).transform.GetChild(0).gameObject;
+            var backGroundCanvas = transform.parent.parent;
+            _playerEditorPanel = Instantiate(playerEditorPrefab, backGroundCanvas).transform.GetChild(0).gameObject;
             _playerEditorPanel.SetActive(false);
+            _deityEditorPanel = Instantiate(deityEditorPrefab, backGroundCanvas).transform.GetChild(0).gameObject;
+            _deityEditorPanel.SetActive(false);
         }
 
         private void Start()
@@ -41,7 +45,8 @@ namespace Input.Menu
 
         private void CreateDeity()
         {
-            // gameObject.SetActive(false);
+            _deityEditorPanel.SetActive(true);
+            gameObject.SetActive(false);
         }
 
         private void QuitApplication()

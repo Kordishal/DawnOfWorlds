@@ -66,6 +66,11 @@
      <Compile Include="Assets\Scripts\Input\Menu\PlayerEditorControl.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerPrefKeys.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\MainMenuControl.cs" />
+     <Compile Include="Assets\Scripts\Model\Deity\Deity.cs" />
+     <Compile Include="Assets\Scripts\Input\Menu\DeityEditorControl.cs" />
+     <Compile Include="Assets\Scripts\Player\Data\DeityFactory.cs" />
+     <Compile Include="Assets\Scripts\Input\Menu\DeityEditControl.cs" />
+     <Compile Include="Assets\Scripts\Input\Menu\DeityDetailControl.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
