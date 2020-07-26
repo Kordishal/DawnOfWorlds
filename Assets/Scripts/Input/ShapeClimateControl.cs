@@ -17,12 +17,12 @@ namespace Input
 
         private void AddWeatherEffect()
         {
-            if (_map.selectedTile != null) _map.selectedTile.weatherEffects.Add(_selectedEffect);
+            if (_map.selectedTile != null) _map.selectedTile.AddWeatherEffect(_selectedEffect);
         }
 
         private void RemoveWeatherEffect()
         {
-            if (_map.selectedTile != null) _map.selectedTile.weatherEffects.Remove(_selectedEffect);
+            if (_map.selectedTile != null) _map.selectedTile.RemoveWeatherEffect(_selectedEffect);
         }
 
         private void Start()

@@ -209,7 +209,6 @@ GameObject:
   - component: {fileID: 2394926678670345223}
   - component: {fileID: 2394926678670345220}
   - component: {fileID: 8899731758868636266}
-  - component: {fileID: 3177361707284933410}
   m_Layer: 5
   m_Name: ShapeClimateControlPanel
   m_TagString: UIElement
@@ -292,18 +291,6 @@ MonoBehaviour:
   dropdown: {fileID: 2394926679044366021}
   addButton: {fileID: 3353211883816892220}
   removeButton: {fileID: 3674643811702630524}
---- !u!114 &3177361707284933410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2394926678670345218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e3559ad4d9911dd87d6062d68653aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2394926679044366019
 GameObject:
   m_ObjectHideFlags: 0

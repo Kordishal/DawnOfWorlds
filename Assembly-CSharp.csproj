@@ -59,6 +59,9 @@
      <Compile Include="Assets\Scripts\Input\ShapeClimateControl.cs" />
      <Compile Include="Assets\Scripts\Model\World\WorldMap.cs" />
      <Compile Include="Assets\Scripts\Model\Tiles\WorldTile.cs" />
+     <Compile Include="Assets\Scripts\Input\TileDetailsComponentControl.cs" />
+     <Compile Include="Assets\Scripts\Meta\EventArgs\SelectedWorldTileEventArg.cs" />
+     <Compile Include="Assets\Scripts\Meta\EventArgs\ChangedWorldTileEventArg.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
