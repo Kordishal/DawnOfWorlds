@@ -2,6 +2,7 @@
 using Model.Tiles;
 using Model.World;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Input
@@ -13,6 +14,7 @@ namespace Input
 
         public void OnSelect(InputAction.CallbackContext context)
         {
+            if (EventSystem.current.IsPointerOverGameObject(-1)) return;
             if (!context.performed) return;
             var pos = Mouse.current.position;
             var x = pos.x.ReadValue();
@@ -20,8 +22,7 @@ namespace Input
             var ray = camera.ScreenPointToRay(new Vector3(x, y, 0));
             var hit = Physics2D.GetRayIntersection(ray);
             if (hit.collider == null) return;
-            var newTile = hit.collider.transform.gameObject.GetComponent<WorldTile>();
-            map.UpdateSelection(newTile);
+            map.UpdateSelection(hit.collider.gameObject.GetComponent<WorldTile>());
         }
 
         public void OnScroll(InputAction.CallbackContext context)
@@ -74,7 +75,6 @@ namespace Input
         private bool _moveLeft;
         private bool _panIsActive;
 
-
         private void TranslateCamera()
         {
             var (x, y) = DetermineDelta();
@@ -84,19 +84,15 @@ namespace Input
         private Tuple<int, int> DetermineDelta()
         {
             if (_moveUp) return new Tuple<int, int>(0, 4);
-            if (_moveDown)
-                return new Tuple<int, int>(0, -4);
-            if (_moveRight)
-                return new Tuple<int, int>(4, 0);
-            if (_moveLeft)
-                return new Tuple<int, int>(-4, 0);
+            if (_moveDown) return new Tuple<int, int>(0, -4);
+            if (_moveRight) return new Tuple<int, int>(4, 0);
+            if (_moveLeft) return new Tuple<int, int>(-4, 0);
             if (!_panIsActive) return new Tuple<int, int>(0, 0);
             var delta = Mouse.current.delta;
             var x = delta.x.ReadValue();
             var y = delta.y.ReadValue();
             return new Tuple<int, int>((int) x, (int) y);
         }
-
 
         private void Update()
         {
