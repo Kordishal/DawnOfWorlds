@@ -1,4 +1,6 @@
+using JetBrains.Annotations;
 using Model.Deity;
+using Player.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -19,6 +21,9 @@ namespace Input.Menu
         public GameObject deityDetail;
         private GameObject _mainMenu;
 
+        private DeityFactory _factory;
+
+        [CanBeNull]
         public Deity currentDeity;
         
         private void OnClickMainMenu()
@@ -34,7 +39,11 @@ namespace Input.Menu
 
         private void DeleteDeity()
         {
-            
+            if (currentDeity == null || currentDeity.identifier == 0) return;
+            _factory.DeleteDeity(currentDeity.identifier);
+            currentDeity = null;
+            deityEdit.SetActive(false);
+            deityDetail.SetActive(false);
         }
 
         private void EditDeity()
@@ -44,15 +53,16 @@ namespace Input.Menu
         
         private void Awake()
         {
-            _mainMenu = GameObject.Find("MainMenuComponent");
             deityDetail = Instantiate(deityDetailPrefab, transform);
             deityDetail.SetActive(false);
             deityEdit = Instantiate(deityEditPrefab, transform);
-            deityEdit.SetActive(false);
+            deityEdit.SetActive(false);   
         }
 
         private void Start()
         {
+            _factory = DeityFactory.GetInstance(Application.persistentDataPath);
+            _mainMenu = GameObject.Find("MainMenuComponent");
             mainMenuButton.onClick.AddListener(OnClickMainMenu);
             createDeity.onClick.AddListener(CreateDeity);
             deleteDeity.onClick.AddListener(DeleteDeity);
@@ -61,7 +71,8 @@ namespace Input.Menu
         
         private void OnDisable()
         {
-            _mainMenu.SetActive(true);
+            if (_mainMenu != null)
+                _mainMenu.SetActive(true);
         }
     }
 }

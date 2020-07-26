@@ -9,6 +9,13 @@ namespace Player.Data
 {
     public class DeityFactory
     {
+        private static DeityFactory _factory;
+
+        public static DeityFactory GetInstance(string path)
+        {
+            return _factory ?? (_factory = new DeityFactory(path));
+        }
+
         private const string FileName = "deities.json";
         private const string DirectoryName = "deities";
 
@@ -17,7 +24,7 @@ namespace Player.Data
         private readonly string _saveFile;
         private readonly DeityCollection _collection;
 
-        public DeityFactory(string basePath)
+        private DeityFactory(string basePath)
         {
             var directory = Path.Combine(basePath, DirectoryName);
             _saveFile = Path.Combine(directory, FileName);
@@ -25,10 +32,12 @@ namespace Player.Data
             {
                 Directory.CreateDirectory(directory);
             }
+
             if (!File.Exists(_saveFile))
             {
                 SaveDeities();
             }
+
             _collection = JsonUtility.FromJson<DeityCollection>(File.ReadAllText(_saveFile)) ?? new DeityCollection();
         }
 

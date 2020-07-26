@@ -1,4 +1,3 @@
-using System;
 using Model.Deity;
 using Player.Data;
 using UnityEngine;
@@ -21,7 +20,7 @@ namespace Input.Menu
         private void Start()
         {
             parent = GetComponentInParent<DeityEditorControl>();
-            _factory = new DeityFactory(Application.persistentDataPath);
+            _factory = DeityFactory.GetInstance(Application.persistentDataPath);
             save.onClick.AddListener(Save);
             cancel.onClick.AddListener(Cancel);
         }
@@ -41,6 +40,7 @@ namespace Input.Menu
         private void Save()
         {
             // TODO: Add message that you can't save without a name!
+            if (parent.currentDeity == null) parent.currentDeity = new Deity();
             if (nameInput.text ==  "") return;
             int.TryParse(identifier.text, out parent.currentDeity.identifier);
             parent.currentDeity.name = nameInput.text;
@@ -60,7 +60,7 @@ namespace Input.Menu
         private void Cancel()
         {
             gameObject.SetActive(false);
-            if (parent.currentDeity.identifier != 0)
+            if (parent.currentDeity != null && parent.currentDeity.identifier != 0)
             {
                 parent.deityDetail.SetActive(true);
             }
