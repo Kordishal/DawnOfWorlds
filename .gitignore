@@ -2,6 +2,7 @@ Packages/
 Library/
 Logs/
 obj/
+Build/
 ProjectSettings/
 Temp/
 UserSettings/
