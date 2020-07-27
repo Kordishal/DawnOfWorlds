@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using JetBrains.Annotations;
 using Meta.EventArgs;
 using Model.Deity;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Player.Data
 {
-    public class DeityFactory
+    public sealed class DeityFactory
     {
         private static DeityFactory _factory;
 
@@ -39,28 +40,25 @@ namespace Player.Data
             }
         }
         public event EventHandler<ChangedCurrentDeityEventUpdate> OnCurrentDeityChange;
-        protected virtual void OnCurrentDeityChanged([CanBeNull] Deity deity)
+
+        private void OnCurrentDeityChanged([CanBeNull] Deity deity)
         {
             OnCurrentDeityChange?.Invoke(this, new ChangedCurrentDeityEventUpdate(deity));
         }
         public event EventHandler<EventArgs> OnDeityListChange;
-        protected virtual void OnDeityListChanged()
+
+        private void OnDeityListChanged()
         {
             OnDeityListChange?.Invoke(this, new EventArgs());
         }
-
         private DeityFactory(string basePath)
         {
             var directory = Path.Combine(basePath, DirectoryName);
             _saveFile = Path.Combine(directory, FileName);
             if (!Directory.Exists(directory))
-            {
                 Directory.CreateDirectory(directory);
-            }
             if (!File.Exists(_saveFile))
-            {
-                SaveDeities();
-            }
+                File.Create(_saveFile).Close();
             _collection = JsonUtility.FromJson<DeityCollection>(File.ReadAllText(_saveFile)) ?? new DeityCollection();
             foreach (var deity in GetDeities())
             {
@@ -76,19 +74,17 @@ namespace Player.Data
             var deity = new Deity(NextDeityIdentifier, name);
             if (_collection.deities == null) _collection.deities = new List<Deity>();
             _collection.deities.Add(deity);
-            SaveDeities();
-            OnDeityListChanged();
             _currentMaxIdentifier += 1;
             CurrentDeity = deity;
+            SaveDeities();
         }
 
         public bool DeleteDeity(int identifier)
         {
             if (identifier >= NextDeityIdentifier) return false;
             if (!_collection.deities.Remove(new Deity(identifier))) return false;
-            SaveDeities();
-            OnDeityListChanged();
             CurrentDeity = null;
+            SaveDeities();
             return true;
         }
 
@@ -96,9 +92,8 @@ namespace Player.Data
         {
             _collection.deities.Remove(deity);
             _collection.deities.Add(deity);
-            SaveDeities();
-            OnDeityListChanged();
             CurrentDeity = deity;
+            SaveDeities();
         }
 
         [CanBeNull]
@@ -108,12 +103,13 @@ namespace Player.Data
 
         public IEnumerable<Deity> GetDeities()
         {
-            return _collection.deities;
+            return _collection?.deities ?? Enumerable.Empty<Deity>();
         }
         
         private void SaveDeities()
         {
-            File.WriteAllText(_saveFile, JsonUtility.ToJson(_collection));
+            File.WriteAllText(_saveFile, JsonUtility.ToJson(_collection.deities.OrderBy(deity => deity.identifier)));
+            OnDeityListChanged();
         }
 
         [Serializable]

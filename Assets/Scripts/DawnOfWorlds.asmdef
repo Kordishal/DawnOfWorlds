@@ -1,0 +1,6 @@
+{
+  "name": "DawnOfWorlds",
+  "references": [
+    "Unity.InputSystem"
+  ]
+}

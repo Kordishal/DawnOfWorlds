@@ -101,10 +101,6 @@ MonoBehaviour:
   deityEdit: {fileID: 0}
   deityDetailPrefab: {fileID: 2359525946625070602, guid: e55b0569ac277aa059c39d9ec02a2305, type: 3}
   deityDetail: {fileID: 0}
-  currentDeity:
-    identifier: 0
-    name: 
-    currentPowerPoints: 0
 --- !u!1 &2178446085044228062
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,21 +200,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6069571261553179967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2925490120340886796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891f593cb3a445eb9705fee578907f3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deityButtonPrefab: {fileID: 881043565608312642, guid: ee1ecb5cef7c795db9662113714fe291, type: 3}
-  content: {fileID: 5271470366248436588}
-  controller: {fileID: 641448555109971253}
 --- !u!1 &3866457706784514512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,7 +1121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6872431506672288887, guid: a55c7b5db48ee264f9626c721fcc58b1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000043775708
+      value: 0.000013243407
       objectReference: {fileID: 0}
     - target: {fileID: 9217968415553317595, guid: a55c7b5db48ee264f9626c721fcc58b1, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1152,18 +1133,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55c7b5db48ee264f9626c721fcc58b1, type: 3}
---- !u!1 &2925490120340886796 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1125366293570478651, guid: a55c7b5db48ee264f9626c721fcc58b1, type: 3}
-  m_PrefabInstance: {fileID: 2812347805616715575}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &210228765292663238 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2733006160649299697, guid: a55c7b5db48ee264f9626c721fcc58b1, type: 3}
-  m_PrefabInstance: {fileID: 2812347805616715575}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5271470366248436588 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7939689134663054427, guid: a55c7b5db48ee264f9626c721fcc58b1, type: 3}
   m_PrefabInstance: {fileID: 2812347805616715575}
   m_PrefabAsset: {fileID: 0}
