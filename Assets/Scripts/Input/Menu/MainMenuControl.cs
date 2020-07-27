@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,14 +14,15 @@ namespace Input.Menu
         public Button createDeity;
         public Button quit;
 
+        [CanBeNull]
         private GameObject _playerEditorPanel;
+        [CanBeNull]
         private GameObject _deityEditorPanel;
 
+        private Transform _uiCanvas;
         private void Awake()
         {
-            var backGroundCanvas = transform.parent.parent;
-            _playerEditorPanel = Instantiate(playerEditorPrefab, backGroundCanvas).transform.GetChild(0).gameObject;
-            _deityEditorPanel = Instantiate(deityEditorPrefab, backGroundCanvas).transform.GetChild(0).gameObject;
+            _uiCanvas = transform.parent.parent;
         }
 
         private void Start()
@@ -29,13 +31,12 @@ namespace Input.Menu
             settings.onClick.AddListener(OnClickSettings);
             createDeity.onClick.AddListener(CreateDeity);
             quit.onClick.AddListener(QuitApplication);
-            
-            _playerEditorPanel.SetActive(false);    
-            _deityEditorPanel.SetActive(false);
         }
 
         private void OnClickSettings()
         {
+            if (_playerEditorPanel == null)
+                _playerEditorPanel = Instantiate(playerEditorPrefab, _uiCanvas).transform.GetChild(0).gameObject;
             _playerEditorPanel.SetActive(true);
             gameObject.SetActive(false);
         }
@@ -46,6 +47,8 @@ namespace Input.Menu
 
         private void CreateDeity()
         {
+            if (_deityEditorPanel == null)
+                _deityEditorPanel = Instantiate(deityEditorPrefab, _uiCanvas).transform.GetChild(0).gameObject;
             _deityEditorPanel.SetActive(true);
             gameObject.SetActive(false);
         }

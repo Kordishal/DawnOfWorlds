@@ -97,10 +97,8 @@ MonoBehaviour:
   createDeity: {fileID: 2342335762095750415}
   deleteDeity: {fileID: 2652702184464055185}
   editDeity: {fileID: 1125956524880613237}
-  deityEditPrefab: {fileID: 777850043632414389, guid: 96cfbff011f752a69a4fd3d783a28fba, type: 3}
-  deityEdit: {fileID: 0}
   deityDetailPrefab: {fileID: 2359525946625070602, guid: e55b0569ac277aa059c39d9ec02a2305, type: 3}
-  deityDetail: {fileID: 0}
+  deityEditPrefab: {fileID: 777850043632414389, guid: 96cfbff011f752a69a4fd3d783a28fba, type: 3}
 --- !u!1 &2178446085044228062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,7 +1119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6872431506672288887, guid: a55c7b5db48ee264f9626c721fcc58b1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000013243407
+      value: 0.000089033514
       objectReference: {fileID: 0}
     - target: {fileID: 9217968415553317595, guid: a55c7b5db48ee264f9626c721fcc58b1, type: 3}
       propertyPath: m_AnchorMax.x

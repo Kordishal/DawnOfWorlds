@@ -333,12 +333,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5d6405e40c40e28d606e0c6ca10560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
   identifier: {fileID: 6525792832207941418}
   nameInput: {fileID: 4363048338133787763}
   powerPoints: {fileID: 5661685475317780301}
   save: {fileID: 7552639135278096745}
-  cancel: {fileID: 7552639135278096745}
+  cancel: {fileID: 2877007705335615574}
+  deityDetailComponentPrefab: {fileID: 2359525946625070602, guid: e55b0569ac277aa059c39d9ec02a2305, type: 3}
 --- !u!1 &1522778595971075100
 GameObject:
   m_ObjectHideFlags: 0

@@ -216,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deityButtonPrefab: {fileID: 881043565608312642, guid: ee1ecb5cef7c795db9662113714fe291, type: 3}
   content: {fileID: 7939689134663054427}
+  deityDetailComponentPrefab: {fileID: 2359525946625070602, guid: e55b0569ac277aa059c39d9ec02a2305, type: 3}
 --- !u!1 &1667637322618837199
 GameObject:
   m_ObjectHideFlags: 0

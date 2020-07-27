@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
+using Meta;
 using Player.Data;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Input.Menu
 {
@@ -11,39 +14,40 @@ namespace Input.Menu
         public GameObject deityButtonPrefab;
         public GameObject content;
 
-        private DeityFactory _factory;
-
         private List<DeitySelectButtonControl> _buttons;
-
-        private void Start()
+        
+        public void UpdateButtons(DeityFactory factory, Action activateDetailsView, Action deactivateDetailsView)
         {
-            _factory = DeityFactory.GetInstance(Application.persistentDataPath);
-            _factory.OnDeityListChange += OnDeityUpdate;
-            OnDeityUpdate(null, null);
-        }
-
-        private void SelectDeityOnClick(int identifier)
-        {
-            _factory.CurrentDeity = _factory.GetDeity(identifier);
-        }
-
-        private void OnDeityUpdate(object sender, EventArgs eventArgs)
-        {
+            void SelectDeityOnClick(int identifier)
+            {
+                if (factory.CurrentDeity != null && factory.CurrentDeity.identifier == identifier)
+                {
+                    deactivateDetailsView();
+                    factory.CurrentDeity = null;
+                }
+                else
+                {
+                    factory.CurrentDeity = factory.GetDeity(identifier);
+                    activateDetailsView();
+                }
+            }
+            
             if (_buttons == null) _buttons = new List<DeitySelectButtonControl>();
             foreach (var button in _buttons)
             {
-                _factory.OnCurrentDeityChange -= button.ChangeCurrentDeity;
+                factory.OnCurrentDeityChange -= button.ChangeCurrentDeity;
                 Destroy(button);
             }
             _buttons.Clear();
             var count = 1;
-            foreach (var deity in _factory.GetDeities().OrderBy(deity => deity.identifier))
+            var collection = factory.GetDeities().OrderBy(deity => deity.identifier);
+            foreach (var deity in collection)
             {
                 var deityButton = Instantiate(deityButtonPrefab, content.transform);
                 var control = deityButton.GetComponent<DeitySelectButtonControl>();
                 control.UpdateText(deity);
                 control.button.onClick.AddListener(delegate { SelectDeityOnClick(deity.identifier); });
-                _factory.OnCurrentDeityChange += control.ChangeCurrentDeity;
+                factory.OnCurrentDeityChange += control.ChangeCurrentDeity;
                 var deityButtonRect = deityButton.GetComponent<RectTransform>();
                 deityButtonRect.anchoredPosition = new Vector2(0, 30 + (-60 * count));
                 deityButtonRect.offsetMax = new Vector2(0, deityButtonRect.offsetMax.y);

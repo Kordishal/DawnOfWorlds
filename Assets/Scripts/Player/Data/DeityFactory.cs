@@ -12,6 +12,9 @@ namespace Player.Data
 {
     public sealed class DeityFactory
     {
+        private static readonly object LockCurrentDeity = new object();
+        private static readonly object LockDeityCollection = new object();
+
         private static DeityFactory _factory;
 
         public static DeityFactory GetInstance(string path)
@@ -33,20 +36,29 @@ namespace Player.Data
 
         public Deity CurrentDeity
         {
-            get => _currentDeity;
+            get
+            {
+                lock (LockCurrentDeity)
+                {
+                    return _currentDeity;
+                }
+            }
             set
             {
                 if (_currentDeity == value) return;
-                OnCurrentDeityChanged(value);
-                _currentDeity = value;
+                lock (LockCurrentDeity)
+                {
+                    _currentDeity = value;
+                    OnCurrentDeityChanged(value);
+                }
             }
         }
 
-        public event EventHandler<ChangedCurrentDeityEventUpdate> OnCurrentDeityChange;
+        public event EventHandler<DeityEventArgs> OnCurrentDeityChange;
 
         private void OnCurrentDeityChanged([CanBeNull] Deity deity)
         {
-            OnCurrentDeityChange?.Invoke(this, new ChangedCurrentDeityEventUpdate(deity));
+            OnCurrentDeityChange?.Invoke(this, new DeityEventArgs(deity));
         }
 
         public event EventHandler<EventArgs> OnDeityListChange;
@@ -78,39 +90,56 @@ namespace Player.Data
 
         public void CreateDeity(string name)
         {
-            var deity = new Deity(NextDeityIdentifier, name);
-            if (_deities.TryAdd(deity.identifier, deity))
+            lock (LockDeityCollection)
             {
+                var deity = new Deity(NextDeityIdentifier, name);
+                if (!_deities.TryAdd(deity.identifier, deity)) return;
                 _currentMaxIdentifier += 1;
                 CurrentDeity = deity;
                 SaveDeities();
             }
         }
 
-        public bool DeleteDeity(int identifier)
+        public bool DeleteDeity()
         {
-            if (!_deities.TryRemove(identifier, out _)) return false;
-            CurrentDeity = null;
-            SaveDeities();
-            return true;
-        }
-
-        public void UpdateDeity(Deity deity)
-        { 
-            if (_deities.TryUpdate(deity.identifier, deity, _deities[deity.identifier]))
+            if (CurrentDeity == null) return false;
+            lock (LockDeityCollection)
             {
-                CurrentDeity = deity;
+                if (!_deities.TryRemove(CurrentDeity.identifier, out _)) return false;
+                CurrentDeity = null;
                 SaveDeities();
+                return true;
             }
         }
+
+        public void UpdateDeity(string newName)
+        {
+            lock (LockCurrentDeity)
+            {
+                lock (LockDeityCollection)
+                {
+                    var newDeity = new Deity(CurrentDeity.identifier, newName, CurrentDeity.currentPowerPoints);
+                    if (!_deities.TryUpdate(CurrentDeity.identifier, newDeity,  CurrentDeity)) return;
+                    CurrentDeity = newDeity;
+                    SaveDeities();
+                }
+            }
+        }
+
         public Deity GetDeity(int identifier)
         {
-            return _deities[identifier];
+            lock (LockDeityCollection)
+            {
+                return _deities[identifier];
+            }
         }
 
         public IEnumerable<Deity> GetDeities()
         {
-            return _deities.Values;
+            lock (LockDeityCollection)
+            {
+                return _deities.Values;
+            }
         }
 
         private void SaveDeities()
@@ -119,7 +148,6 @@ namespace Player.Data
             {
                 deities = _deities.Values.ToList()
             };
-
             File.WriteAllText(_saveFile, JsonUtility.ToJson(collection));
             OnDeityListChanged();
         }
@@ -127,11 +155,15 @@ namespace Player.Data
         [Serializable]
         private class DeityCollection
         {
-            public List<Deity> deities;
+            [CanBeNull] public List<Deity> deities;
 
             public ConcurrentDictionary<int, Deity> ToConcurrentDictionary()
             {
-                return new ConcurrentDictionary<int, Deity>(deities.Cast<KeyValuePair<int, Deity>>());
+                if (deities != null)
+                    return new ConcurrentDictionary<int, Deity>(deities.Select(deity =>
+                        new KeyValuePair<int, Deity>(deity.identifier, deity)));
+                else
+                    return new ConcurrentDictionary<int, Deity>();
             }
         }
     }

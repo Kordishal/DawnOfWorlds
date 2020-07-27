@@ -61,7 +61,7 @@
      <Compile Include="Assets\Scripts\Model\World\Position.cs" />
      <Compile Include="Assets\Scripts\Model\TileFeatures\Biome.cs" />
      <Compile Include="Assets\Scripts\Model\TileFeatures\WeatherEffect.cs" />
-     <Compile Include="Assets\Scripts\Meta\EventArgs\ChangedCurrentDeityEventUpdate.cs" />
+     <Compile Include="Assets\Scripts\Meta\EventArgs\DeityEventArgs.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityDetailControl.cs" />
      <Compile Include="Assets\Scripts\Model\TileFeatures\TileFeatures.cs" />
      <Compile Include="Assets\Scripts\Input\PlayerWorldInput.cs" />
@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\Model\World\WorldMap.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\PlayerEditorControl.cs" />
      <Compile Include="Assets\Scripts\Model\Tiles\WorldTile.cs" />
+     <Compile Include="Assets\Scripts\Meta\Tags.cs" />
      <None Include="Assets\Scripts\DawnOfWorlds.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

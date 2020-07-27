@@ -1,8 +1,6 @@
-using System;
 using Meta.EventArgs;
 using Model.Deity;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Input.Menu
@@ -20,12 +18,11 @@ namespace Input.Menu
         }
 
         private int GetIdentifier() => int.Parse(identifierText.text);
-
-
-        public void ChangeCurrentDeity(object _, ChangedCurrentDeityEventUpdate currentDeityArgs)
+        
+        public void ChangeCurrentDeity(object _, DeityEventArgs currentDeityArgs)
         {
-            if (currentDeityArgs.ChangedCurrentDeity != null &&
-                currentDeityArgs.ChangedCurrentDeity.identifier == GetIdentifier())
+            if (currentDeityArgs.Deity != null &&
+                currentDeityArgs.Deity.identifier == GetIdentifier())
             {
                 button.GetComponent<Image>().color = Color.red;
             }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Meta;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +12,7 @@ namespace Input.Menu
         public PlayerSettings settings;
         public Button mainMenuButton;
 
-        private GameObject mainMenu;
+        private GameObject _mainMenu;
         private void OnNameInput(string input)
         {
             settings.Name = input;
@@ -22,15 +22,11 @@ namespace Input.Menu
         {
             gameObject.SetActive(false);
         }
-
-        private void Awake()
-        {
-            settings = GameObject.Find("Player").GetComponent<PlayerSettings>();
-            mainMenu = GameObject.Find("MainMenuComponent");
-        }
-
+        
         private void Start()
         {
+            settings = GameObject.Find("Player").GetComponent<PlayerSettings>();
+            _mainMenu = GameObject.FindWithTag(Tags.MainMenuComponent);
             nameInput.onEndEdit.AddListener(OnNameInput);
             nameInput.text = settings.Name;
             mainMenuButton.onClick.AddListener(OnClickMainMenu);
@@ -38,7 +34,7 @@ namespace Input.Menu
         
         private void OnDisable()
         {
-            mainMenu.SetActive(true);
+            _mainMenu.SetActive(true);
         }
     }
 }
