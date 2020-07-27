@@ -118,8 +118,8 @@ namespace Input.Menu
 
         private void UpdateViews(object _, DeityEventArgs currentDeity)
         {
-            if (currentDeity.Deity == null) return;
             _deityEditControl.UpdateValues(currentDeity.Deity);
+            if (currentDeity.Deity == null) return;
             _deityDetailControl.UpdateValues(currentDeity.Deity);
         }
 

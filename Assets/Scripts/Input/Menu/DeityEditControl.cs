@@ -13,20 +13,26 @@ namespace Input.Menu
 
         public Button save;
         public Button cancel;
-        
+
         public string GetName()
         {
             return nameInput.text;
         }
-        
+
         public void UpdateValues(Deity currentDeity)
         {
-            if (currentDeity.identifier != 0)
+            if (currentDeity == null)
+            {
+                identifier.text = 0.ToString();
+                nameInput.text = "";
+                powerPoints.text = 0.ToString();
+            }
+            else
             {
                 identifier.text = currentDeity.identifier.ToString();
+                nameInput.text = currentDeity.name;
+                powerPoints.text = currentDeity.currentPowerPoints.ToString();
             }
-            nameInput.text = currentDeity.name;
-            powerPoints.text = currentDeity.currentPowerPoints.ToString();
         }
     }
 }
