@@ -75,6 +75,7 @@
      <Compile Include="Assets\Scripts\Input\Menu\PlayerEditorControl.cs" />
      <Compile Include="Assets\Scripts\Model\Tiles\WorldTile.cs" />
      <Compile Include="Assets\Scripts\Meta\Tags.cs" />
+     <Compile Include="Assets\Scripts\Meta\Default.cs" />
      <None Include="Assets\Scripts\DawnOfWorlds.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

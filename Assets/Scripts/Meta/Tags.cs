@@ -5,5 +5,6 @@ namespace Meta
         public const string UiElement = "UIElement";
         public const string DeityDetailComponent = "DeityDetailComponent";
         public const string MainMenuComponent = "MainMenuComponent";
+        public const string Player = "Player";
     }
 }

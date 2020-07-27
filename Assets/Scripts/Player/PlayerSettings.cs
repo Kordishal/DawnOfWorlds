@@ -1,13 +1,12 @@
 ﻿using System;
+using Meta;
+using Model.Deity;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerSettings : MonoBehaviour
     {
-        private const string DefaultName = "Player";
-        
-
         private string _name;
         public string Name
         {
@@ -20,10 +19,13 @@ namespace Player
                 PlayerPrefs.Save();
             }
         }
+        
+        public Deity selectedDeity;
 
         private void Awake()
         {
-            _name = !PlayerPrefs.HasKey(PlayerPrefKeys.PlayerName) ? DefaultName : PlayerPrefs.GetString(PlayerPrefKeys.PlayerName);
+            DontDestroyOnLoad(gameObject);
+            _name = !PlayerPrefs.HasKey(PlayerPrefKeys.PlayerName) ? Default.PlayerName : PlayerPrefs.GetString(PlayerPrefKeys.PlayerName);
         }
     }
 }
