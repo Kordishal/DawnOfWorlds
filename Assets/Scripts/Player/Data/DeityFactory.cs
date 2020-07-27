@@ -20,7 +20,9 @@ namespace Player.Data
         private const string FileName = "deities.json";
         private const string DirectoryName = "deities";
 
-        private int NextDeityIdentifier => _collection?.deities?.Count + 1 ?? 1;
+        private int _currentMaxIdentifier = 0;
+
+        private int NextDeityIdentifier => _currentMaxIdentifier + 1;
 
         private readonly string _saveFile;
         private readonly DeityCollection _collection;
@@ -60,6 +62,13 @@ namespace Player.Data
                 SaveDeities();
             }
             _collection = JsonUtility.FromJson<DeityCollection>(File.ReadAllText(_saveFile)) ?? new DeityCollection();
+            foreach (var deity in GetDeities())
+            {
+                if (deity.identifier > _currentMaxIdentifier)
+                {
+                    _currentMaxIdentifier = deity.identifier;
+                }
+            }
         }
 
         public void CreateDeity(string name)
@@ -69,6 +78,7 @@ namespace Player.Data
             _collection.deities.Add(deity);
             SaveDeities();
             OnDeityListChanged();
+            _currentMaxIdentifier += 1;
         }
 
         public bool DeleteDeity(int identifier)
