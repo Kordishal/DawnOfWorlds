@@ -70,7 +70,8 @@ namespace Input.Menu
         {
             _factory = DeityFactory.GetInstance(Application.persistentDataPath);
             _factory.OnCurrentDeityChange += ActivateDetailsViewOnSelection;
-            _mainMenu = GameObject.Find("MainMenuComponent");
+            if (_mainMenu == null)
+                _mainMenu = GameObject.Find("MainMenuComponent");
             mainMenuButton.onClick.AddListener(OnClickMainMenu);
             createDeity.onClick.AddListener(CreateDeity);
             deleteDeity.onClick.AddListener(DeleteDeity);
@@ -81,8 +82,9 @@ namespace Input.Menu
 
         private void OnDisable()
         {
-            if (_mainMenu != null)
-                _mainMenu.SetActive(true);
+            if (_mainMenu == null)
+                _mainMenu = GameObject.Find("MainMenuComponent");
+            _mainMenu.SetActive(true);
         }
     }
 }

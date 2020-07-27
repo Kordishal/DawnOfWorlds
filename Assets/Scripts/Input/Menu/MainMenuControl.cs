@@ -20,9 +20,7 @@ namespace Input.Menu
         {
             var backGroundCanvas = transform.parent.parent;
             _playerEditorPanel = Instantiate(playerEditorPrefab, backGroundCanvas).transform.GetChild(0).gameObject;
-            _playerEditorPanel.SetActive(false);
             _deityEditorPanel = Instantiate(deityEditorPrefab, backGroundCanvas).transform.GetChild(0).gameObject;
-            _deityEditorPanel.SetActive(false);
         }
 
         private void Start()
@@ -31,6 +29,9 @@ namespace Input.Menu
             settings.onClick.AddListener(OnClickSettings);
             createDeity.onClick.AddListener(CreateDeity);
             quit.onClick.AddListener(QuitApplication);
+            
+            _playerEditorPanel.SetActive(false);    
+            _deityEditorPanel.SetActive(false);
         }
 
         private void OnClickSettings()
