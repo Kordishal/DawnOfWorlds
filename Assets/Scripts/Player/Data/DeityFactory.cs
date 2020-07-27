@@ -79,6 +79,7 @@ namespace Player.Data
             SaveDeities();
             OnDeityListChanged();
             _currentMaxIdentifier += 1;
+            CurrentDeity = deity;
         }
 
         public bool DeleteDeity(int identifier)
@@ -87,6 +88,7 @@ namespace Player.Data
             if (!_collection.deities.Remove(new Deity(identifier))) return false;
             SaveDeities();
             OnDeityListChanged();
+            CurrentDeity = null;
             return true;
         }
 
@@ -96,6 +98,7 @@ namespace Player.Data
             _collection.deities.Add(deity);
             SaveDeities();
             OnDeityListChanged();
+            CurrentDeity = deity;
         }
 
         [CanBeNull]

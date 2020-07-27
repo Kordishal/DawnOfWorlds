@@ -19,10 +19,11 @@ namespace Input.Menu
         private DeityFactory _factory;
         private void Start()
         {
-            _factory = DeityFactory.GetInstance(Application.persistentDataPath);
+            if (_factory == null) 
+                _factory = DeityFactory.GetInstance(Application.persistentDataPath);
+            _factory.OnCurrentDeityChange += ChangeCurrentDeity;
             save.onClick.AddListener(Save);
             cancel.onClick.AddListener(Cancel);
-            gameObject.SetActive(false);
         }
         
         private void ChangeCurrentDeity(object _, ChangedCurrentDeityEventUpdate changedCurrentDeityEventUpdate)
@@ -60,7 +61,6 @@ namespace Input.Menu
             {
                 _factory.UpdateDeity(currentDeity);
             }
-            _factory.CurrentDeity = currentDeity;
             gameObject.SetActive(false);
         }
 
@@ -71,19 +71,8 @@ namespace Input.Menu
 
         private void OnEnable()
         {
-            if (_factory == null) 
-                _factory = DeityFactory.GetInstance(Application.persistentDataPath);
-            if (_factory.CurrentDeity == null) return;
-            _factory.OnCurrentDeityChange += ChangeCurrentDeity;
-            UpdateValues(_factory.CurrentDeity);
-        }
-
-        private void OnDisable()
-        {
-            if (_factory != null)
-            {
-                _factory.OnCurrentDeityChange -= ChangeCurrentDeity;
-            }
+            if (_factory != null && _factory.CurrentDeity != null)
+                UpdateValues(_factory.CurrentDeity);
         }
     }
 }

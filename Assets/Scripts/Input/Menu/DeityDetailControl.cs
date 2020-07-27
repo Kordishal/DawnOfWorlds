@@ -9,7 +9,6 @@ namespace Input.Menu
 {
     public class DeityDetailControl : MonoBehaviour
     {
-        [CanBeNull]
         private DeityFactory _factory;
 
         public Text identifier;
@@ -18,8 +17,9 @@ namespace Input.Menu
 
         private void Start()
         {
-            _factory = DeityFactory.GetInstance(Application.persistentDataPath);
-            gameObject.SetActive(false);
+            if (_factory == null)
+                _factory = DeityFactory.GetInstance(Application.persistentDataPath);
+            _factory.OnCurrentDeityChange += ChangeCurrentDeity;
         }
 
         private void ChangeCurrentDeity(object sender, ChangedCurrentDeityEventUpdate changedCurrentDeityEventUpdate)
@@ -37,23 +37,17 @@ namespace Input.Menu
             {
                 identifier.text = currentDeity.identifier.ToString();
             }
+
             nameValue.text = currentDeity.name;
             powerPoints.text = currentDeity.currentPowerPoints.ToString();
         }
 
         private void OnEnable()
-        {            
-            if (_factory == null) 
-                _factory = DeityFactory.GetInstance(Application.persistentDataPath);
-            if (_factory.CurrentDeity == null) return;
-            _factory.OnCurrentDeityChange += ChangeCurrentDeity;
-            UpdateValues(_factory.CurrentDeity);
-        }
-
-        private void OnDisable()
         {
-            if (_factory == null) return;
-            _factory.OnCurrentDeityChange -= ChangeCurrentDeity;
+            if (_factory == null)
+                _factory = DeityFactory.GetInstance(Application.persistentDataPath);
+            if (_factory.CurrentDeity != null)
+                UpdateValues(_factory.CurrentDeity);
         }
     }
 }
