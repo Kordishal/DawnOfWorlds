@@ -216,7 +216,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deityButtonPrefab: {fileID: 881043565608312642, guid: ee1ecb5cef7c795db9662113714fe291, type: 3}
   content: {fileID: 7939689134663054427}
-  controller: {fileID: 0}
 --- !u!1 &1667637322618837199
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00035910783}
+  m_AnchoredPosition: {x: 0, y: 0.000013996461}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8375913745220258233

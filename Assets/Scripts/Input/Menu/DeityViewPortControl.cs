@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Model.Deity;
+using System.Linq;
 using Player.Data;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Input.Menu
 {
@@ -38,7 +37,7 @@ namespace Input.Menu
             }
             _buttons.Clear();
             var count = 1;
-            foreach (var deity in _factory.GetDeities())
+            foreach (var deity in _factory.GetDeities().OrderBy(deity => deity.identifier))
             {
                 var deityButton = Instantiate(deityButtonPrefab, content.transform);
                 var control = deityButton.GetComponent<DeitySelectButtonControl>();
