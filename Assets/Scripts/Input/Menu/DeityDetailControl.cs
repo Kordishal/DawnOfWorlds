@@ -9,12 +9,14 @@ namespace Input.Menu
         public Text identifier;
         public Text nameValue;
         public Text powerPoints;
+
         public void UpdateValues(Deity currentDeity)
         {
             if (currentDeity.identifier != 0)
             {
                 identifier.text = currentDeity.identifier.ToString();
             }
+
             nameValue.text = currentDeity.name;
             powerPoints.text = currentDeity.currentPowerPoints.ToString();
         }

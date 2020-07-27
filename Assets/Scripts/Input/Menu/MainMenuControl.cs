@@ -14,12 +14,11 @@ namespace Input.Menu
         public Button createDeity;
         public Button quit;
 
-        [CanBeNull]
-        private GameObject _playerEditorPanel;
-        [CanBeNull]
-        private GameObject _deityEditorPanel;
+        [CanBeNull] private GameObject _playerEditorPanel;
+        [CanBeNull] private GameObject _deityEditorPanel;
 
         private Transform _uiCanvas;
+
         private void Awake()
         {
             _uiCanvas = transform.parent.parent;
@@ -37,6 +36,7 @@ namespace Input.Menu
         {
             if (_playerEditorPanel == null)
                 _playerEditorPanel = Instantiate(playerEditorPrefab, _uiCanvas).transform.GetChild(0).gameObject;
+            _playerEditorPanel.GetComponent<PlayerEditorControl>().mainMenu = gameObject;
             _playerEditorPanel.SetActive(true);
             gameObject.SetActive(false);
         }
@@ -49,8 +49,9 @@ namespace Input.Menu
         {
             if (_deityEditorPanel == null)
                 _deityEditorPanel = Instantiate(deityEditorPrefab, _uiCanvas).transform.GetChild(0).gameObject;
-            _deityEditorPanel.SetActive(true);
+            _deityEditorPanel.GetComponent<DeityEditorControl>().mainMenu = gameObject;
             gameObject.SetActive(false);
+            _deityEditorPanel.SetActive(true);
         }
 
         private void QuitApplication()

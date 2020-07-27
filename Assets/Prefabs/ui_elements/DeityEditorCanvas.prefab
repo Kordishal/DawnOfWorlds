@@ -99,6 +99,7 @@ MonoBehaviour:
   editDeity: {fileID: 1125956524880613237}
   deityDetailPrefab: {fileID: 2359525946625070602, guid: e55b0569ac277aa059c39d9ec02a2305, type: 3}
   deityEditPrefab: {fileID: 777850043632414389, guid: 96cfbff011f752a69a4fd3d783a28fba, type: 3}
+  mainMenu: {fileID: 0}
 --- !u!1 &2178446085044228062
 GameObject:
   m_ObjectHideFlags: 0

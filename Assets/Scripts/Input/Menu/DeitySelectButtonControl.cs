@@ -18,7 +18,7 @@ namespace Input.Menu
         }
 
         private int GetIdentifier() => int.Parse(identifierText.text);
-        
+
         public void ChangeCurrentDeity(object _, DeityEventArgs currentDeityArgs)
         {
             if (currentDeityArgs.Deity != null &&

@@ -13,7 +13,7 @@ namespace Input.Menu
         public GameObject content;
 
         private List<DeitySelectButtonControl> _buttons;
-        
+
         public void UpdateButtons(DeityFactory factory, Action activateDetailsView, Action deactivateDetailsView)
         {
             void SelectDeityOnClick(int identifier)
@@ -29,13 +29,14 @@ namespace Input.Menu
                     activateDetailsView();
                 }
             }
-            
+
             if (_buttons == null) _buttons = new List<DeitySelectButtonControl>();
             foreach (var button in _buttons)
             {
                 factory.OnCurrentDeityChange -= button.ChangeCurrentDeity;
                 Destroy(button.gameObject);
             }
+
             _buttons.Clear();
             var count = 1;
             var collection = factory.GetDeities().OrderBy(deity => deity.identifier);
@@ -54,6 +55,7 @@ namespace Input.Menu
                 _buttons.Add(control);
                 count += 1;
             }
+
             var contentRect = content.GetComponent<RectTransform>();
             contentRect.offsetMin = new Vector2(contentRect.offsetMin.x, -60 * (count - 1));
         }

@@ -5,6 +5,7 @@ using Meta.EventArgs;
 using Model.Deity;
 using Player.Data;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Input.Menu
@@ -24,16 +25,13 @@ namespace Input.Menu
 
         private DeityViewPortControl _deityViewPortControl;
 
-        private GameObject _mainMenu;
+        public GameObject mainMenu;
 
         private DeityFactory _factory;
 
         private void Start()
         {
             _factory = DeityFactory.GetInstance(Application.persistentDataPath);
-            if (_mainMenu == null)
-                _mainMenu = GameObject.FindWithTag(Tags.MainMenuComponent);
-
             _deityDetailControl = Instantiate(deityDetailPrefab, transform).GetComponent<DeityDetailControl>();
             _deityDetailControl.gameObject.SetActive(false);
 
@@ -85,6 +83,7 @@ namespace Input.Menu
             {
                 _factory.UpdateDeity(newName);
             }
+
             Cancel();
         }
 
@@ -145,9 +144,7 @@ namespace Input.Menu
 
         private void OnDisable()
         {
-            if (_mainMenu == null)
-                _mainMenu = GameObject.FindWithTag(Tags.MainMenuComponent);
-            _mainMenu.SetActive(true);
+            mainMenu.SetActive(true);
         }
     }
 }
