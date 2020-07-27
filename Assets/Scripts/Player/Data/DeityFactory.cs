@@ -103,12 +103,15 @@ namespace Player.Data
         public bool DeleteDeity()
         {
             if (CurrentDeity == null) return false;
-            lock (LockDeityCollection)
+            lock (LockCurrentDeity)
             {
-                if (!_deities.TryRemove(CurrentDeity.identifier, out _)) return false;
-                CurrentDeity = null;
-                SaveDeities();
-                return true;
+                lock (LockDeityCollection)
+                {
+                    if (!_deities.TryRemove(CurrentDeity.identifier, out _)) return false;
+                    CurrentDeity = null;
+                    SaveDeities();
+                    return true;
+                }
             }
         }
 

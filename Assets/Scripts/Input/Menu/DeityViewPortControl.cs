@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using Meta;
+using Meta.EventArgs;
 using Player.Data;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Input.Menu
 {
@@ -36,7 +34,7 @@ namespace Input.Menu
             foreach (var button in _buttons)
             {
                 factory.OnCurrentDeityChange -= button.ChangeCurrentDeity;
-                Destroy(button);
+                Destroy(button.gameObject);
             }
             _buttons.Clear();
             var count = 1;
@@ -48,13 +46,14 @@ namespace Input.Menu
                 control.UpdateText(deity);
                 control.button.onClick.AddListener(delegate { SelectDeityOnClick(deity.identifier); });
                 factory.OnCurrentDeityChange += control.ChangeCurrentDeity;
+                control.ChangeCurrentDeity(null, new DeityEventArgs(factory.CurrentDeity));
                 var deityButtonRect = deityButton.GetComponent<RectTransform>();
                 deityButtonRect.anchoredPosition = new Vector2(0, 30 + (-60 * count));
                 deityButtonRect.offsetMax = new Vector2(0, deityButtonRect.offsetMax.y);
                 deityButtonRect.offsetMin = new Vector2(0, deityButtonRect.offsetMin.y);
+                _buttons.Add(control);
                 count += 1;
             }
-
             var contentRect = content.GetComponent<RectTransform>();
             contentRect.offsetMin = new Vector2(contentRect.offsetMin.x, -60 * (count - 1));
         }
