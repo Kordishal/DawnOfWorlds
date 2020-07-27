@@ -1,3 +1,7 @@
+using JetBrains.Annotations;
+using Meta.EventArgs;
+using Model.Deity;
+using Player.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,7 +9,8 @@ namespace Input.Menu
 {
     public class DeityDetailControl : MonoBehaviour
     {
-        public DeityEditorControl parent;
+        [CanBeNull]
+        private DeityFactory _factory;
 
         public Text identifier;
         public Text nameValue;
@@ -13,26 +18,42 @@ namespace Input.Menu
 
         private void Start()
         {
-            parent = GetComponentInParent<DeityEditorControl>();
+            _factory = DeityFactory.GetInstance(Application.persistentDataPath);
+            gameObject.SetActive(false);
         }
 
-        public void ChangeCurrentDeity()
+        private void ChangeCurrentDeity(object sender, ChangedCurrentDeityEventUpdate changedCurrentDeityEventUpdate)
         {
-            if (parent.currentDeity == null) return;
-            if (parent.currentDeity.identifier != 0)
+            var currentDeity = changedCurrentDeityEventUpdate.ChangedCurrentDeity;
+            if (currentDeity != null)
             {
-                identifier.text = parent.currentDeity.identifier.ToString();
+                UpdateValues(currentDeity);
             }
+        }
 
-            nameValue.text = parent.currentDeity.name;
-            powerPoints.text = parent.currentDeity.currentPowerPoints.ToString();
+        private void UpdateValues(Deity currentDeity)
+        {
+            if (currentDeity.identifier != 0)
+            {
+                identifier.text = currentDeity.identifier.ToString();
+            }
+            nameValue.text = currentDeity.name;
+            powerPoints.text = currentDeity.currentPowerPoints.ToString();
         }
 
         private void OnEnable()
+        {            
+            if (_factory == null) 
+                _factory = DeityFactory.GetInstance(Application.persistentDataPath);
+            if (_factory.CurrentDeity == null) return;
+            _factory.OnCurrentDeityChange += ChangeCurrentDeity;
+            UpdateValues(_factory.CurrentDeity);
+        }
+
+        private void OnDisable()
         {
-            if (parent == null)
-                parent = GetComponentInParent<DeityEditorControl>();
-            ChangeCurrentDeity();
+            if (_factory == null) return;
+            _factory.OnCurrentDeityChange -= ChangeCurrentDeity;
         }
     }
 }

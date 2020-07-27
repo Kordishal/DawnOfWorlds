@@ -1,4 +1,6 @@
+using System;
 using JetBrains.Annotations;
+using Meta.EventArgs;
 using Model.Deity;
 using Player.Data;
 using UnityEngine;
@@ -23,56 +25,75 @@ namespace Input.Menu
 
         private DeityFactory _factory;
 
-        [CanBeNull]
-        public Deity currentDeity;
-        
         private void OnClickMainMenu()
         {
             gameObject.SetActive(false);
         }
 
+        private void ActivateDetailsViewOnSelection(object sender, ChangedCurrentDeityEventUpdate currentDeityArgs)
+        {
+            var currentDeity = currentDeityArgs.ChangedCurrentDeity;
+            if (currentDeity == null) return;
+            if (deityDetail.activeInHierarchy) return;
+            deityDetail.SetActive(true);
+        } 
+
         private void CreateDeity()
         {
-            currentDeity = new Deity();
+            deityDetail.SetActive(false);
             deityEdit.SetActive(true);
+            _factory.CurrentDeity = null;
         }
 
         private void DeleteDeity()
         {
-            if (currentDeity == null || currentDeity.identifier == 0) return;
-            _factory.DeleteDeity(currentDeity.identifier);
-            currentDeity = null;
+            if (_factory.CurrentDeity == null || _factory.CurrentDeity.identifier == 0) return;
+            if (!_factory.DeleteDeity(_factory.CurrentDeity.identifier)) return;
+            _factory.CurrentDeity = null;
             deityEdit.SetActive(false);
             deityDetail.SetActive(false);
         }
 
         private void EditDeity()
         {
-            
+            if (_factory.CurrentDeity == null) return;
+            deityDetail.SetActive(false);
+            deityEdit.SetActive(true);
         }
-        
+
         private void Awake()
         {
             deityDetail = Instantiate(deityDetailPrefab, transform);
-            deityDetail.SetActive(false);
             deityEdit = Instantiate(deityEditPrefab, transform);
-            deityEdit.SetActive(false);   
         }
 
         private void Start()
         {
             _factory = DeityFactory.GetInstance(Application.persistentDataPath);
+            _factory.OnCurrentDeityChange -= ActivateDetailsViewOnSelection;
+            _factory.OnCurrentDeityChange += ActivateDetailsViewOnSelection;
             _mainMenu = GameObject.Find("MainMenuComponent");
             mainMenuButton.onClick.AddListener(OnClickMainMenu);
             createDeity.onClick.AddListener(CreateDeity);
             deleteDeity.onClick.AddListener(DeleteDeity);
             editDeity.onClick.AddListener(EditDeity);
         }
-        
+
+        private void OnEnable()
+        {
+            if (_factory == null) return;
+            _factory.OnCurrentDeityChange -= ActivateDetailsViewOnSelection;
+            _factory.OnCurrentDeityChange += ActivateDetailsViewOnSelection;
+        }
+
         private void OnDisable()
         {
             if (_mainMenu != null)
                 _mainMenu.SetActive(true);
+            if (_factory != null)
+            {
+                _factory.OnCurrentDeityChange -= ActivateDetailsViewOnSelection;
+            }
         }
     }
 }

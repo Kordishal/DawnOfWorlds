@@ -71,6 +71,9 @@
      <Compile Include="Assets\Scripts\Player\Data\DeityFactory.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityEditControl.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityDetailControl.cs" />
+     <Compile Include="Assets\Scripts\Input\Menu\DeityViewPortControl.cs" />
+     <Compile Include="Assets\Scripts\Input\Menu\DeitySelectButtonControl.cs" />
+     <Compile Include="Assets\Scripts\Meta\EventArgs\ChangedCurrentDeityEventUpdate.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
