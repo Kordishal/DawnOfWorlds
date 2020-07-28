@@ -31,6 +31,13 @@ namespace Session
             endTurn.onClick.AddListener(EndTurn);
         }
 
+        public bool SpendPoints(int cost)
+        {
+            if (_currentPlayer.ActiveDeity.currentPowerPoints < cost) return false;
+            _currentPlayer.ActiveDeity.currentPowerPoints -= cost;
+            return true;
+        }
+
 
         private void EndTurn()
         {
