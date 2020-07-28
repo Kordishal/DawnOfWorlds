@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Input
+namespace Input.PowerControls
 {
     public class PowerButtonScript : MonoBehaviour
     {
