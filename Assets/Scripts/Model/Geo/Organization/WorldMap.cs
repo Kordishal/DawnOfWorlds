@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Input;
 using JetBrains.Annotations;
 using Meta.EventArgs;
-using Model.Tiles;
+using Model.Geo.Support;
 using UnityEngine;
 
-namespace Model.World
+namespace Model.Geo.Organization
 {
     public class WorldMap : MonoBehaviour
     {

@@ -1,24 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Model.Geo.Features.Climate;
+using Model.Geo.Features.Terrain;
 using UnityEngine;
 
-namespace Model.TileFeatures
+namespace Model.Geo.Features
 {
-    public static class TileFeatures
+    public static class FeatureManager
     {
         private static readonly string BasePath = Application.streamingAssetsPath;
         private const string PathWeatherEffects = "tiles/effects/weather.json";
-        private const string PathBiomes = "tiles/effects/weather.json";
+        private const string PathBiomes = "tiles/effects/biomes.json";
         public static List<WeatherEffect> LoadWeatherEffects()
         {
-            var path = System.IO.Path.Combine(BasePath, PathWeatherEffects);
+            var path = Path.Combine(BasePath, PathWeatherEffects);
             var text = File.ReadAllText(path);
             return JsonUtility.FromJson<WeatherEffectCollection>(text).effects;
         }
         public static List<Biome> LoadBiomes()
         {
-            var path = System.IO.Path.Combine(BasePath, PathWeatherEffects);
+            var path = Path.Combine(BasePath, PathWeatherEffects);
             var text = File.ReadAllText(path);
             return JsonUtility.FromJson<BiomeCollection>(text).biomes;
         }

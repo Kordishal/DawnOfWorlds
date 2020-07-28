@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Meta.EventArgs;
-using Model.TileFeatures;
-using Model.World;
+using Model.Geo.Features.Climate;
+using Model.Geo.Features.Terrain;
+using Model.Geo.Support;
 using UnityEngine;
 
-namespace Model.Tiles
+namespace Model.Geo.Organization
 {
     [Serializable]
     public class WorldTile : MonoBehaviour

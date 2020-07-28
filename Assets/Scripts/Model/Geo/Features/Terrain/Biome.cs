@@ -1,6 +1,6 @@
 using System;
 
-namespace Model.TileFeatures
+namespace Model.Geo.Features.Terrain
 {
     [Serializable]
     public class Biome

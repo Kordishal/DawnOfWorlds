@@ -1,6 +1,5 @@
 ﻿using System;
-using Model.Tiles;
-using Model.World;
+using Model.Geo.Organization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;

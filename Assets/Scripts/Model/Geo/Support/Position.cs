@@ -1,6 +1,6 @@
 using System;
 
-namespace Model.World
+namespace Model.Geo.Support
 {
     [Serializable]
     public class Position

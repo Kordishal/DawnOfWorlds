@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Meta;
-using Model.TileFeatures;
-using Model.World;
+using Model.Geo.Features;
+using Model.Geo.Features.Climate;
+using Model.Geo.Organization;
 using Session;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,7 +41,7 @@ namespace Input.PowerControls
         private void Start()
         {
             _map = GameObject.FindWithTag(Tags.World).GetComponent<WorldMap>();
-            _effects = TileFeatures.LoadWeatherEffects();
+            _effects = FeatureManager.LoadWeatherEffects();
             foreach (var weatherEffect in _effects) dropdown.options.Add(new Dropdown.OptionData(weatherEffect.name));
             dropdown.onValueChanged.AddListener(OnValueChange);
             dropdown.value = 1;
