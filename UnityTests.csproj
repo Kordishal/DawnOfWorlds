@@ -50,8 +50,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\UnityTests\TestDeityFactory.cs" />
      <Compile Include="Assets\UnityTests\TestTileFeatureLoader.cs" />
+     <Compile Include="Assets\UnityTests\TestDeityFactory.cs" />
      <None Include="Assets\UnityTests\UnityTests.asmdef" />
  <Reference Include="UnityEngine.TestRunner">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
