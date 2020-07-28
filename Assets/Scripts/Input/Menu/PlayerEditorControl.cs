@@ -1,5 +1,4 @@
-﻿using Meta;
-using Player;
+﻿using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +7,7 @@ namespace Input.Menu
     public class PlayerEditorControl : MonoBehaviour
     {
         public InputField nameInput;
-        public PlayerSettings settings;
+        public HumanPlayer settings;
         public Button mainMenuButton;
 
         public GameObject mainMenu;
@@ -25,7 +24,7 @@ namespace Input.Menu
 
         private void Start()
         {
-            settings = GameObject.Find("Player").GetComponent<PlayerSettings>();
+            settings = GameObject.Find("Player").GetComponent<HumanPlayer>();
             nameInput.onEndEdit.AddListener(OnNameInput);
             nameInput.text = settings.Name;
             mainMenuButton.onClick.AddListener(OnClickMainMenu);

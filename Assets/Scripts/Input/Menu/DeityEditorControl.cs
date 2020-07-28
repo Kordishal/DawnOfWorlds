@@ -1,13 +1,10 @@
 using System;
-using JetBrains.Annotations;
 using Meta;
 using Meta.EventArgs;
-using Model.Deity;
 using Player;
 using Player.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Input.Menu
@@ -31,7 +28,7 @@ namespace Input.Menu
         public GameObject mainMenu;
 
         private DeityFactory _factory;
-        private PlayerSettings _playerData;
+        private HumanPlayer _sessionPlayerData;
 
         private void Start()
         {
@@ -49,7 +46,7 @@ namespace Input.Menu
             _factory.OnDeityListChange += UpdateViewPort;
             _factory.OnCurrentDeityChange += UpdateViews;
 
-            _playerData = GameObject.FindWithTag(Tags.Player).GetComponent<PlayerSettings>();
+            _sessionPlayerData = GameObject.FindWithTag(Tags.Player).GetComponent<HumanPlayer>();
 
             mainMenuButton.onClick.AddListener(OnClickMainMenu);
             createDeity.onClick.AddListener(CreateDeity);
@@ -81,7 +78,7 @@ namespace Input.Menu
         private void StartGame()
         {
             if (_factory.CurrentDeity == null) return;
-            _playerData.selectedDeity = _factory.CurrentDeity;
+            _sessionPlayerData.ActiveDeity = _factory.CurrentDeity;
             SceneManager.LoadScene(1);
         }
 

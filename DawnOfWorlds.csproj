@@ -53,16 +53,23 @@
      <Compile Include="Assets\Scripts\Input\Menu\DeitySelectButtonControl.cs" />
      <Compile Include="Assets\Scripts\Meta\EventArgs\SelectedWorldTileEventArg.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\MainMenuControl.cs" />
+     <Compile Include="Assets\Scripts\Meta\Default.cs" />
+     <Compile Include="Assets\Scripts\Player\IPlayer.cs" />
      <Compile Include="Assets\Scripts\Input\TileDetailsComponentControl.cs" />
      <Compile Include="Assets\Scripts\Player\Data\DeityFactory.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerSettings.cs" />
+     <Compile Include="Assets\Scripts\Player\HumanPlayer.cs" />
+     <Compile Include="Assets\Scripts\Player\SessionPlayer.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityEditControl.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerData.cs" />
      <Compile Include="Assets\Scripts\Model\Deity\Deity.cs" />
      <Compile Include="Assets\Scripts\Model\World\Position.cs" />
      <Compile Include="Assets\Scripts\Model\TileFeatures\Biome.cs" />
      <Compile Include="Assets\Scripts\Model\TileFeatures\WeatherEffect.cs" />
      <Compile Include="Assets\Scripts\Meta\EventArgs\DeityEventArgs.cs" />
+     <Compile Include="Assets\Scripts\Meta\Tags.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityDetailControl.cs" />
+     <Compile Include="Assets\Scripts\Session\SessionManager.cs" />
+     <Compile Include="Assets\Scripts\Player\BasePlayer.cs" />
      <Compile Include="Assets\Scripts\Model\TileFeatures\TileFeatures.cs" />
      <Compile Include="Assets\Scripts\Input\PlayerWorldInput.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityViewPortControl.cs" />
@@ -74,8 +81,6 @@
      <Compile Include="Assets\Scripts\Model\World\WorldMap.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\PlayerEditorControl.cs" />
      <Compile Include="Assets\Scripts\Model\Tiles\WorldTile.cs" />
-     <Compile Include="Assets\Scripts\Meta\Tags.cs" />
-     <Compile Include="Assets\Scripts\Meta\Default.cs" />
      <None Include="Assets\Scripts\DawnOfWorlds.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
