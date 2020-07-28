@@ -14,11 +14,28 @@ namespace Input
             {
                 var instance = Instantiate(powerPanel, parent.transform);
                 _panel = instance;
+                foreach (Transform child in parent.transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+
                 _panel.SetActive(true);
             }
             else
             {
-                _panel.SetActive(!_panel.activeInHierarchy);
+                if (_panel.activeInHierarchy)
+                {
+                    _panel.SetActive(false);
+                }
+                else
+                {
+                    foreach (Transform child in parent.transform)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+
+                    _panel.SetActive(!_panel.activeInHierarchy);
+                }
             }
         }
     }
