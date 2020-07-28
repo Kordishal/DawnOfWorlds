@@ -8,7 +8,6 @@ namespace Input
 {
     public class TileDetailsComponentControl : MonoBehaviour
     {
-
         public Text tileName;
         public Text tileBiome;
         public Text tileWeatherEffects;
