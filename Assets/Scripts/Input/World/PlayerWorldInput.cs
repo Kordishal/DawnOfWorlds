@@ -3,14 +3,19 @@ using Model.Geo.Organization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-namespace Input
+namespace Input.World
 {
     public class PlayerWorldInput : MonoBehaviour
     {
         public new Camera camera;
         public WorldMap map;
 
+        public Button createAreaButton;
+
+        private AreaBuilder _areaBuilder;
+        
         public void OnSelect(InputAction.CallbackContext context)
         {
             if (EventSystem.current.IsPointerOverGameObject(-1)) return;

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Input;
+using Input.World;
 using JetBrains.Annotations;
 using Meta.EventArgs;
 using Model.Geo.Support;

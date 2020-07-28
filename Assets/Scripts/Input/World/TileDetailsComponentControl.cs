@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using Meta.EventArgs;
+﻿using Meta.EventArgs;
 using Model.Geo.Organization;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Input
+namespace Input.World
 {
     public class TileDetailsComponentControl : MonoBehaviour
     {
