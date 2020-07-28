@@ -21,21 +21,18 @@ namespace Input
 
                 _panel.SetActive(true);
             }
+            else if (_panel.activeInHierarchy)
+            {
+                _panel.SetActive(false);
+            }
             else
             {
-                if (_panel.activeInHierarchy)
+                foreach (Transform child in parent.transform)
                 {
-                    _panel.SetActive(false);
+                    child.gameObject.SetActive(false);
                 }
-                else
-                {
-                    foreach (Transform child in parent.transform)
-                    {
-                        child.gameObject.SetActive(false);
-                    }
 
-                    _panel.SetActive(!_panel.activeInHierarchy);
-                }
+                _panel.SetActive(!_panel.activeInHierarchy);
             }
         }
     }
