@@ -27,15 +27,17 @@ namespace Model.Geo.Organization
         }
         
         /**
-         * Adds a tile to the area. A tile can only be added if it is
-         * either the first tile or the number of tiles does not exceed the maximum number of tiles
+         * Adds a tile to the area. A tile cannot be added to the area if is already part of an area.
+         * The tile must be either the first tile or the number of tiles does not exceed the maximum number of tiles
          * and the tile is neighbouring an already added tile.
+         *
          *
          * <param name="tile">The tile to be added to the area.</param>
          * <returns>Whether the tile was added or not.</returns>
          */
         public bool AddTile(WorldTile tile)
         {
+            if (tile.worldArea != null) return false;
             if (IsEmpty())
             {
                 _tiles.Add(tile);
