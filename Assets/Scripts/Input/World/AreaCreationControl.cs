@@ -51,7 +51,9 @@ namespace Input.World
 
         private void Cancel()
         {
-            _selectionDisplayControl.UpdateSelection(null);
+            _selectionDisplayControl.ClearSelection(_areaBuilder.GetTiles());
+            _areaBuilder = null;
+            _modeControl.ChangeSelectionMode(SelectionMode.Area);
             gameObject.SetActive(false);
         }
 
@@ -61,17 +63,10 @@ namespace Input.World
             var newArea = Instantiate(worldAreaPrefab, _world.transform);
             var worldArea = newArea.GetComponent<WorldArea>();
             _areaBuilder.Build(worldArea);
+            _modeControl.ChangeSelectionMode(SelectionMode.Area);
+            _areaBuilder = null;
             _selectionDisplayControl.UpdateSelection(worldArea.tiles[0]);
             gameObject.SetActive(false);
-        }
-
-        private void OnDisable()
-        {
-            if (_modeControl != null)
-            {
-                _modeControl.ChangeSelectionMode(SelectionMode.Area);
-            }
-            _areaBuilder = null;
         }
 
         private void OnEnable()

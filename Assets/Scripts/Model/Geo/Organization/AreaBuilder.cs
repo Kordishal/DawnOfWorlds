@@ -16,6 +16,8 @@ namespace Model.Geo.Organization
         {
             _tiles = new List<WorldTile>();
         }
+        
+        public IEnumerable<WorldTile> GetTiles() => _tiles;
 
         public bool ChangeName(string name)
         {

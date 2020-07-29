@@ -44,6 +44,16 @@ namespace Input.World
             ChangeSelection(newMode, selectedTile, true);
         }
 
+        public void ClearSelection(IEnumerable<WorldTile> tiles)
+        {
+            foreach (var worldTile in tiles)
+            {
+                _selectionTiles[worldTile.position].SetActive(false);
+            }
+
+            selectedTile = null;
+        }
+
 
         private void Start()
         {
