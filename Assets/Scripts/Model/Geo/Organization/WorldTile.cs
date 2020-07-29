@@ -10,45 +10,22 @@ namespace Model.Geo.Organization
 {
     public sealed class WorldTile : MonoBehaviour
     {
-        public Position Position { get; private set; }
+        public Position position;
+        public WorldMap worldMap;
         public WorldArea worldArea;
-        private List<WeatherEffect> _weatherEffects;
-
-        public string WeatherEffectToString()
-        {
-            return string.Join(", ", _weatherEffects);
-        }
-        private Biome _biome;
-
-        public string BiomeToString()
-        {
-            return _biome.ToString();
-        }
-
-        private const int PositionFactor = 7;
+        public List<WeatherEffect> weatherEffects;
+        public Biome biome;
 
         private void Start()
         {
-            name = "Tile (" + Position.x + ", " + Position.y + ")";
-            _weatherEffects = new List<WeatherEffect>();
-            _biome = new Biome("Barren", "There is no life here.");
+            name = "Tile (" + position.x + ", " + position.y + ")";
+            weatherEffects = new List<WeatherEffect>();
+            biome = new Biome("Barren", "There is no life here.");
         }
-
-        public void ChangePosition(Position newPosition)
-        {
-            Position = newPosition;
-            transform.position = new Vector3(Position.x * PositionFactor, Position.y * PositionFactor, 0);
-        }
-
-        public void SetActive(bool value)
-        {
-            gameObject.SetActive(value);
-        }
-
 
         public void RemoveWeatherEffect(WeatherEffect effect)
         {
-            if (_weatherEffects.Remove(effect))
+            if (weatherEffects.Remove(effect))
             {
                 OnWorldTileChanged(this);
             }
@@ -56,18 +33,22 @@ namespace Model.Geo.Organization
 
         public void AddWeatherEffect(WeatherEffect effect)
         {
-            if (_weatherEffects.Contains(effect)) return;
-            _weatherEffects.Add(effect);
+            if (weatherEffects.Contains(effect)) return;
+            weatherEffects.Add(effect);
             OnWorldTileChanged(this);
         }
-        
-        public event EventHandler<ChangedWorldTileEventArg> WorldTileChanged;
+
+        public event EventHandler<UpdatedWorldTile> WorldTileChanged;
 
         private void OnWorldTileChanged(WorldTile e)
         {
-            var args = new ChangedWorldTileEventArg(e);
+            var args = new UpdatedWorldTile(e);
             WorldTileChanged?.Invoke(this, args);
         }
-        
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

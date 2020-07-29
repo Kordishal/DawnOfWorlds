@@ -8,5 +8,11 @@ namespace Model.Geo.Organization
         public string areaName;
         public List<WorldTile> tiles;
         public WorldRegion worldRegion;
+
+
+        public override string ToString()
+        {
+            return areaName;
+        }
     }
 }

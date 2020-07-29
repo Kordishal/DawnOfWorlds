@@ -3,16 +3,13 @@ using Model.Geo.Organization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace Input.World
 {
     public class PlayerWorldInput : MonoBehaviour
     {
         public new Camera camera;
-        public WorldMap map;
-
-        public SelectionModeControl selectionModeControl;
+        public SelectionDisplayControl selectionDisplayControl;
 
         public void OnSelect(InputAction.CallbackContext context)
         {
@@ -24,7 +21,7 @@ namespace Input.World
             var ray = camera.ScreenPointToRay(new Vector3(x, y, 0));
             var hit = Physics2D.GetRayIntersection(ray);
             if (hit.collider == null) return;
-            map.UpdateSelection(hit.collider.gameObject.GetComponent<WorldTile>(), selectionModeControl.Mode);
+            selectionDisplayControl.UpdateSelection(hit.collider.gameObject.GetComponent<WorldTile>());
         }
 
         public void OnScroll(InputAction.CallbackContext context)

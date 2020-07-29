@@ -8,5 +8,7 @@ namespace Meta
         public const string MainMenuComponent = "MainMenuComponent";
         public const string Player = "Player";
         public const string SessionManager = "SessionManager";
+        public const string MainCamera = "MainCamera";
+        public const string TileDetailsComponent = "TileDetailsComponent";
     }
 }

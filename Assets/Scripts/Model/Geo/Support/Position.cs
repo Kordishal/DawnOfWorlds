@@ -13,6 +13,29 @@ namespace Model.Geo.Support
             this.x = x;
             this.y = y;
         }
+        
+        /**
+         * <summary>
+         * A position is a neighbour of another position if they share an axis.
+         *
+         *<param name="other">The other position.</param>
+         * <returns>true/false</returns>
+         * </summary>
+         */
+        public bool IsNeighbour(Position other)
+        {
+            if (other.x == x)
+            {
+                return other.y == y + 1 || other.y == y - 1;
+            }
+
+            if (other.y == y)
+            {
+                return other.x == x + 1 || other.x == x - 1;
+            }
+
+            return false;
+        }
 
         protected bool Equals(Position other)
         {
