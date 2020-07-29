@@ -21,7 +21,7 @@ namespace Input.World
 
         private void UpdateTexts(WorldArea area)
         {
-            areaName.text = area.name;
+            areaName.text = area.areaName;
             tiles.text = string.Join(", ", area.tiles);
         }
         
