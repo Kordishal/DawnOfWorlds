@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Input.World;
+using Meta;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Input.PowerControls
 {
@@ -6,9 +9,12 @@ namespace Input.PowerControls
     {
         public GameObject parent;
         public GameObject powerPanel;
+        public SelectionMode mode;
+        public SelectionModeControl selectionModeControl;
+
         private GameObject _panel;
 
-        public void OnButtonClick()
+        private void OnButtonClick()
         {
             if (_panel == null)
             {
@@ -20,6 +26,7 @@ namespace Input.PowerControls
                 }
 
                 _panel.SetActive(true);
+                selectionModeControl.ChangeSelectionMode(mode);
             }
             else if (_panel.activeInHierarchy)
             {
@@ -32,8 +39,15 @@ namespace Input.PowerControls
                     child.gameObject.SetActive(false);
                 }
 
-                _panel.SetActive(!_panel.activeInHierarchy);
+                _panel.SetActive(true);
+                selectionModeControl.ChangeSelectionMode(mode);
             }
+        }
+
+
+        private void Start()
+        {
+            GetComponent<Button>().onClick.AddListener(OnButtonClick);
         }
     }
 }

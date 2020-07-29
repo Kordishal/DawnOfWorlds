@@ -1,6 +1,6 @@
 namespace Meta
 {
-    public enum WorldMapSelectionMode
+    public enum SelectionMode
     {
         Tile,
         Area,

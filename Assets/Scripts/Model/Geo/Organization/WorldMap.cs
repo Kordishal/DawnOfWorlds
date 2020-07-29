@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using Input.World;
 using JetBrains.Annotations;
+using Meta;
 using Meta.EventArgs;
 using Model.Geo.Support;
 using UnityEngine;
 
 namespace Model.Geo.Organization
 {
-    public class WorldMap : MonoBehaviour
+    public sealed class WorldMap : MonoBehaviour
     {
         public int width;
         public int height;
@@ -17,6 +18,9 @@ namespace Model.Geo.Organization
         public TileDetailsComponentControl control;
 
         [CanBeNull] public WorldTile selectedTile;
+        [CanBeNull] public WorldArea selectedArea;
+        [CanBeNull] public WorldRegion selectedRegion;
+        
         private WorldTile _selectionTile;
         
         private Dictionary<string, Sprite> _sprites;
@@ -32,11 +36,13 @@ namespace Model.Geo.Organization
             return _tiles.Values;
         }
         
-        public void UpdateSelection([CanBeNull] WorldTile newSelection)
+        public void UpdateSelection([CanBeNull] WorldTile newSelection, SelectionMode mode)
         {
             if (newSelection == null)
             {
                 selectedTile = null;
+                selectedArea = null;
+                selectedRegion = null;
                 _selectionTile.SetActive(false);
             }
             else
@@ -44,6 +50,24 @@ namespace Model.Geo.Organization
                 selectedTile = newSelection;
                 _selectionTile.ChangePosition(selectedTile.Position);
                 _selectionTile.SetActive(true);
+                if (mode == SelectionMode.Area)
+                {
+                    if (selectedTile.worldArea != null)
+                    {
+                        selectedArea = selectedTile.worldArea;
+                    }    
+                } 
+                else if (mode == SelectionMode.Region)
+                {
+                    if (selectedTile.worldArea != null)
+                    {
+                        if (selectedTile.worldArea.worldRegion != null)
+                        {
+                            selectedArea = selectedTile.worldArea;
+                            selectedRegion = selectedArea.worldRegion;
+                        }
+                    }
+                }
                 OnWorldTileSelected(selectedTile);
             }
         }
@@ -78,7 +102,7 @@ namespace Model.Geo.Organization
         
         public event EventHandler<SelectedWorldTileEventArg> WorldTileSelected;
 
-        protected virtual void OnWorldTileSelected(WorldTile e)
+        private void OnWorldTileSelected(WorldTile e)
         {
             var args = new SelectedWorldTileEventArg(e);
             WorldTileSelected?.Invoke(this, args);

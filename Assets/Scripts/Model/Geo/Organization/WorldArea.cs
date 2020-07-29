@@ -7,10 +7,6 @@ namespace Model.Geo.Organization
     {
         public string areaName;
         public List<WorldTile> tiles;
-
-        private Sprite _sprite;
-        
-        
-        
+        public WorldRegion worldRegion;
     }
 }

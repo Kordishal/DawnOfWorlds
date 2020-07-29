@@ -8,10 +8,10 @@ using UnityEngine;
 
 namespace Model.Geo.Organization
 {
-    [Serializable]
-    public class WorldTile : MonoBehaviour
+    public sealed class WorldTile : MonoBehaviour
     {
         public Position Position { get; private set; }
+        public WorldArea worldArea;
         private List<WeatherEffect> _weatherEffects;
 
         public string WeatherEffectToString()
@@ -63,7 +63,7 @@ namespace Model.Geo.Organization
         
         public event EventHandler<ChangedWorldTileEventArg> WorldTileChanged;
 
-        protected virtual void OnWorldTileChanged(WorldTile e)
+        private void OnWorldTileChanged(WorldTile e)
         {
             var args = new ChangedWorldTileEventArg(e);
             WorldTileChanged?.Invoke(this, args);

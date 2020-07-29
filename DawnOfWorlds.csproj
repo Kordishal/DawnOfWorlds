@@ -52,10 +52,13 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Input\Menu\DeitySelectButtonControl.cs" />
      <Compile Include="Assets\Scripts\Meta\EventArgs\SelectedWorldTileEventArg.cs" />
+     <Compile Include="Assets\Scripts\Input\PowerControls\ShapeTerrainControl.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\MainMenuControl.cs" />
      <Compile Include="Assets\Scripts\Meta\Default.cs" />
      <Compile Include="Assets\Scripts\Player\IPlayer.cs" />
      <Compile Include="Assets\Scripts\Input\World\TileDetailsComponentControl.cs" />
+     <Compile Include="Assets\Scripts\Input\World\AreaCreationControl.cs" />
+     <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldRegion.cs" />
      <Compile Include="Assets\Scripts\Player\Data\DeityFactory.cs" />
      <Compile Include="Assets\Scripts\Player\HumanPlayer.cs" />
      <Compile Include="Assets\Scripts\Player\SessionPlayer.cs" />
@@ -66,8 +69,10 @@
      <Compile Include="Assets\Scripts\Model\Geo\Features\Terrain\Biome.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Features\Climate\WeatherEffect.cs" />
      <Compile Include="Assets\Scripts\Meta\EventArgs\DeityEventArgs.cs" />
+     <Compile Include="Assets\Scripts\Meta\SelectionMode.cs" />
      <Compile Include="Assets\Scripts\Meta\Tags.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityDetailControl.cs" />
+     <Compile Include="Assets\Scripts\Model\Geo\Organization\AreaBuilder.cs" />
      <Compile Include="Assets\Scripts\Session\SessionManager.cs" />
      <Compile Include="Assets\Scripts\Player\BasePlayer.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Features\FeatureManager.cs" />
@@ -77,16 +82,12 @@
      <Compile Include="Assets\Scripts\Input\PowerControls\PowerButtonScript.cs" />
      <Compile Include="Assets\Scripts\Input\PowerControls\ShapeClimateControl.cs" />
      <Compile Include="Assets\Scripts\Meta\EventArgs\ChangedWorldTileEventArg.cs" />
+     <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldArea.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerPrefKeys.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldMap.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\PlayerEditorControl.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldTile.cs" />
-     <Compile Include="Assets\Scripts\Input\PowerControls\ShapeTerrainControl.cs" />
-     <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldArea.cs" />
-     <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldRegion.cs" />
-     <Compile Include="Assets\Scripts\Input\World\AreaCreationControl.cs" />
-     <Compile Include="Assets\Scripts\Meta\WorldMapSelectionMode.cs" />
-     <Compile Include="Assets\Scripts\Model\Geo\Organization\AreaBuilder.cs" />
+     <Compile Include="Assets\Scripts\Input\World\SelectionModeControl.cs" />
      <None Include="Assets\Scripts\DawnOfWorlds.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

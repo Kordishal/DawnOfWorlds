@@ -12,10 +12,8 @@ namespace Input.World
         public new Camera camera;
         public WorldMap map;
 
-        public Button createAreaButton;
+        public SelectionModeControl selectionModeControl;
 
-        private AreaBuilder _areaBuilder;
-        
         public void OnSelect(InputAction.CallbackContext context)
         {
             if (EventSystem.current.IsPointerOverGameObject(-1)) return;
@@ -26,7 +24,7 @@ namespace Input.World
             var ray = camera.ScreenPointToRay(new Vector3(x, y, 0));
             var hit = Physics2D.GetRayIntersection(ray);
             if (hit.collider == null) return;
-            map.UpdateSelection(hit.collider.gameObject.GetComponent<WorldTile>());
+            map.UpdateSelection(hit.collider.gameObject.GetComponent<WorldTile>(), selectionModeControl.Mode);
         }
 
         public void OnScroll(InputAction.CallbackContext context)
