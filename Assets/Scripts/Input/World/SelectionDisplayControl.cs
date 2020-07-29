@@ -28,12 +28,14 @@ namespace Input.World
         private Dictionary<Position, SelectionDisplayTile> _selectionTiles;
 
         private WorldTile _selectionTile;
+        private AreaCreationControl _areaCreationControl;
 
         public void UpdateSelection([CanBeNull] WorldTile newSelection)
         {
             if (newSelection == selectedTile) return;
             ChangeSelection(selectionModeControl.CurrentMode, selectedTile, false);
             ChangeSelection(selectionModeControl.CurrentMode, newSelection, true);
+            selectedTile = newSelection;
         }
 
         public void ChangeSelectionMode(SelectionMode oldMode, SelectionMode newMode)
@@ -50,11 +52,13 @@ namespace Input.World
             {
                 for (var j = 0; j < map.height; j++)
                 {
-                    var tile = Instantiate(selectionTilePrefab, transform);
+                    var tile = Instantiate(selectionTilePrefab, map.gameObject.transform);
+                    tile.name = "Selection Tile (" + i + ", " + j + ")";
                     var selectionTile = tile.GetComponent<SelectionDisplayTile>();
                     selectionTile.position = new Position(i, j);
-                    selectionTile.transform.position = new Vector3(i * 7, j * 7, 0);
+                    selectionTile.transform.position = new Vector3(i * 7, j * 7, 10);
                     _selectionTiles[selectionTile.position] = selectionTile;
+                    selectionTile.SetActive(false);
                 }
             }
         }
@@ -98,6 +102,23 @@ namespace Input.World
                     else
                         OnRegionSelectionChanged(null);
 
+                    break;
+                case SelectionMode.AreaCreation:
+                    if (select)
+                    {
+                        if (worldTile == null) return;
+                        if (_areaCreationControl == null)
+                        {
+                            _areaCreationControl = GameObject.FindWithTag(Tags.AreaCreationComponent)
+                                .GetComponent<AreaCreationControl>();
+                        }
+
+                        if (_areaCreationControl.AddTileSelection(worldTile))
+                        {
+                            _selectionTiles[worldTile.position].SetActive(true);
+                        }
+                    }
+                    
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(selectionModeControl.CurrentMode),

@@ -4,6 +4,7 @@ namespace Meta
     {
         Tile,
         Area,
-        Region
+        Region,
+        AreaCreation
     }
 }

@@ -39,7 +39,7 @@ namespace Model.Geo.Organization
                     var tile = Instantiate(tilePrefab, transform);
                     var worldTile = tile.GetComponent<WorldTile>();
                     worldTile.position = new Position(i, j);
-                    worldTile.transform.position = new Vector3(i * 7, j * 7, 10);
+                    worldTile.transform.position = new Vector3(i * 7, j * 7, 20);
                     worldTile.worldMap = this;
                     worldTile.WorldTileChanged += tileDetailsControl.OnTileDataUpdate;
                     _tiles[worldTile.position] = worldTile;

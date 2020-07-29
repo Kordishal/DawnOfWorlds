@@ -12,7 +12,9 @@ namespace Input.World
         public Button cancelButton;
 
         private AreaBuilder _areaBuilder;
-        
+
+        private SelectionModeControl _modeControl;
+
         private void Start()
         {
             nameInputField.onEndEdit.AddListener(SaveName);

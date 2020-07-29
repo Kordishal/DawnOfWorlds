@@ -9,7 +9,6 @@ namespace Input.World
     public class SelectionModeControl : MonoBehaviour
     {
         public GameObject detailsCanvas;
-        public GameObject tileDetailsComponentPrefab;
         public GameObject areaDetailsComponentPrefab;
         public GameObject regionDetailsComponentPrefab;
         public SelectionDisplayControl selectionDisplayControl;
@@ -47,6 +46,10 @@ namespace Input.World
                 case SelectionMode.Region:
                     regionSelectionMode.interactable = !enable;
                     ChangeRegionDetailsComponentStatus(enable);
+                    break;
+                case SelectionMode.AreaCreation:
+                    areaSelectionMode.interactable = !enable;
+                    ChangeAreaDetailsComponentStatus(enable);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);

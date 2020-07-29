@@ -10,5 +10,6 @@ namespace Meta
         public const string SessionManager = "SessionManager";
         public const string MainCamera = "MainCamera";
         public const string TileDetailsComponent = "TileDetailsComponent";
+        public const string AreaCreationComponent = "AreaCreationComponent";
     }
 }
