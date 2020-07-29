@@ -18,6 +18,7 @@ namespace Input.World
         private AreaBuilder _areaBuilder;
 
         private SelectionModeControl _modeControl;
+        private SelectionDisplayControl _selectionDisplayControl;
 
         private void Start()
         {
@@ -25,6 +26,8 @@ namespace Input.World
             saveButton.onClick.AddListener(Save);
             cancelButton.onClick.AddListener(Cancel);
             _world = GameObject.FindWithTag(Tags.World);
+            _selectionDisplayControl = GameObject.FindWithTag(Tags.MainCamera).GetComponent<SelectionDisplayControl>();
+            _modeControl = GameObject.FindWithTag(Tags.PowerButtonPanel).GetComponent<SelectionModeControl>();
         }
 
         public bool AddTileSelection(WorldTile tile)
@@ -48,6 +51,7 @@ namespace Input.World
 
         private void Cancel()
         {
+            _selectionDisplayControl.UpdateSelection(null);
             gameObject.SetActive(false);
         }
 
@@ -57,11 +61,16 @@ namespace Input.World
             var newArea = Instantiate(worldAreaPrefab, _world.transform);
             var worldArea = newArea.GetComponent<WorldArea>();
             _areaBuilder.Build(worldArea);
+            _selectionDisplayControl.UpdateSelection(worldArea.tiles[0]);
             gameObject.SetActive(false);
         }
 
         private void OnDisable()
         {
+            if (_modeControl != null)
+            {
+                _modeControl.ChangeSelectionMode(SelectionMode.Area);
+            }
             _areaBuilder = null;
         }
 
