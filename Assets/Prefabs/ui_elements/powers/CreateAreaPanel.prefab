@@ -410,6 +410,8 @@ MonoBehaviour:
   nameInputField: {fileID: 8234982384834042685}
   saveButton: {fileID: 5915689846705809053}
   cancelButton: {fileID: 1640293304424702579}
+  world: {fileID: 0}
+  worldAreaPrefab: {fileID: 6156225887193631939, guid: ae1da1e42d62cc9cd939749e96644cfd, type: 3}
 --- !u!1 &5898040298429248665
 GameObject:
   m_ObjectHideFlags: 0

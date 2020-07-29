@@ -55,6 +55,10 @@ namespace Model.Geo.Organization
         {
             area.areaName = _name;
             area.tiles = _tiles;
+            foreach (var worldTile in _tiles)
+            {
+                worldTile.worldArea = area;
+            }
         }
 
         public bool IsValid()

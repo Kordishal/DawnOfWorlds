@@ -1539,8 +1539,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 258631241}
-  powerPanel: {fileID: 2166870304517741894, guid: 53bd2bd1fb99802219163794ce732e1e, type: 3}
-  mode: 1
+  powerPanel: {fileID: 4113195129931637037, guid: 891c3d866f26cb03398ba2382acf5a8e, type: 3}
+  mode: 3
   selectionModeControl: {fileID: 1875030888}
 --- !u!1 &992248719
 GameObject:

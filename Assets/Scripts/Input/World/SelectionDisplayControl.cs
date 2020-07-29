@@ -104,21 +104,29 @@ namespace Input.World
 
                     break;
                 case SelectionMode.AreaCreation:
-                    if (select)
+                    if (!select) return;
+                    if (worldTile == null) return;
+                    if (_areaCreationControl == null)
                     {
-                        if (worldTile == null) return;
-                        if (_areaCreationControl == null)
-                        {
-                            _areaCreationControl = GameObject.FindWithTag(Tags.AreaCreationComponent)
-                                .GetComponent<AreaCreationControl>();
-                        }
+                        _areaCreationControl = GameObject.FindWithTag(Tags.AreaCreationComponent)
+                            .GetComponent<AreaCreationControl>();
+                    }
 
+                    if (_selectionTiles[worldTile.position].IsActive)
+                    {
+                        if (_areaCreationControl.RemoveTileSelection(worldTile))
+                        {
+                            _selectionTiles[worldTile.position].SetActive(false);
+                        }
+                    }
+                    else
+                    {
                         if (_areaCreationControl.AddTileSelection(worldTile))
                         {
                             _selectionTiles[worldTile.position].SetActive(true);
                         }
                     }
-                    
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(selectionModeControl.CurrentMode),

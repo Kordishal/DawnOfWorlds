@@ -1,3 +1,4 @@
+using Meta;
 using Model.Geo.Organization;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,9 @@ namespace Input.World
         public Button saveButton;
         public Button cancelButton;
 
+        private GameObject _world;
+        public GameObject worldAreaPrefab;
+
         private AreaBuilder _areaBuilder;
 
         private SelectionModeControl _modeControl;
@@ -20,11 +24,17 @@ namespace Input.World
             nameInputField.onEndEdit.AddListener(SaveName);
             saveButton.onClick.AddListener(Save);
             cancelButton.onClick.AddListener(Cancel);
+            _world = GameObject.FindWithTag(Tags.World);
         }
 
         public bool AddTileSelection(WorldTile tile)
         {
             return _areaBuilder.AddTile(tile);
+        }
+
+        public bool RemoveTileSelection(WorldTile tile)
+        {
+            return _areaBuilder.RemoveTile(tile);
         }
 
         private void SaveName(string text)
@@ -44,8 +54,9 @@ namespace Input.World
         private void Save()
         {
             if (!_areaBuilder.IsValid()) return;
-            // TODO: Implement save
-
+            var newArea = Instantiate(worldAreaPrefab, _world.transform);
+            var worldArea = newArea.GetComponent<WorldArea>();
+            _areaBuilder.Build(worldArea);
             gameObject.SetActive(false);
         }
 

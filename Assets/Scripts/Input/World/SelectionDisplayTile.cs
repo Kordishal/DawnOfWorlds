@@ -8,9 +8,11 @@ namespace Input.World
     {
         public Position position;
         public new SpriteRenderer renderer;
+        public bool IsActive => renderer.enabled;
         public void SetActive(bool value)
         {
             renderer.enabled = value;
         }
+        
     }
 }
