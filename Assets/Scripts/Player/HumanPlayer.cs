@@ -1,6 +1,4 @@
-using Meta;
 using Model.Deity;
-using UnityEngine;
 
 namespace Player
 {
@@ -10,7 +8,7 @@ namespace Player
         {
             Data = new PlayerData();
             DontDestroyOnLoad(gameObject);
-            Data.Name = !PlayerPrefs.HasKey(PlayerPrefKeys.PlayerName) ? Default.PlayerName : PlayerPrefs.GetString(PlayerPrefKeys.PlayerName);
+            Data.Name = ProfileSettings.Name;
             if (Data.ActiveDeity == null)
             {
                 Data.ActiveDeity = new Deity(0, "Odin", 0);

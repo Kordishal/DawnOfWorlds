@@ -5,19 +5,13 @@ namespace Player
 {
     public abstract class BasePlayer : MonoBehaviour, IPlayer
     {
-        
+
         protected PlayerData Data;
+        
         public string Name
         {
             get => Data.Name;
-            set
-            {
-                if (Data == null) Data = new PlayerData();
-                if (value != Data.Name) return;
-                Data.Name = value;
-                PlayerPrefs.SetString(PlayerPrefKeys.PlayerName, Data.Name);
-                PlayerPrefs.Save();
-            }
+            set => Data.Name = value;
         }
 
         public Deity ActiveDeity

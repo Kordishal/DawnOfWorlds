@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Model.Geo.Features.Climate;
 using UnityEngine;
 
 namespace Model.Geo.Organization
@@ -9,6 +10,7 @@ namespace Model.Geo.Organization
         public List<WorldTile> tiles;
         public WorldRegion worldRegion;
 
+        public Climate climate;
 
         public override string ToString()
         {

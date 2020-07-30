@@ -96,6 +96,10 @@
      <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldTile.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Organization\RegionBuilder.cs" />
      <Compile Include="Assets\Scripts\Input\World\RegionCreationControl.cs" />
+     <Compile Include="Assets\Scripts\Model\Geo\Features\Climate\Climate.cs" />
+     <Compile Include="Assets\Scripts\Input\Menu\ClimateDropdown.cs" />
+     <Compile Include="Assets\Scripts\Meta\EventArgs\ClimateEventArgs.cs" />
+     <Compile Include="Assets\Scripts\Player\ProfileSettings.cs" />
      <None Include="Assets\Scripts\DawnOfWorlds.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

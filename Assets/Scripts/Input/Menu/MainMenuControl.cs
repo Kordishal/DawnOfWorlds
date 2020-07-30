@@ -35,8 +35,11 @@ namespace Input.Menu
         private void OnClickSettings()
         {
             if (_playerEditorPanel == null)
+            {
                 _playerEditorPanel = Instantiate(playerEditorPrefab, _uiCanvas).transform.GetChild(0).gameObject;
-            _playerEditorPanel.GetComponent<PlayerEditorControl>().mainMenu = gameObject;
+                _playerEditorPanel.GetComponent<PlayerEditorControl>().SetMainMenu(gameObject);
+            }
+
             _playerEditorPanel.SetActive(true);
             gameObject.SetActive(false);
         }
