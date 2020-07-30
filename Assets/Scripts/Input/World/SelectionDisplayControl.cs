@@ -29,6 +29,7 @@ namespace Input.World
 
         private WorldTile _selectionTile;
         private AreaCreationControl _areaCreationControl;
+        private RegionCreationControl _regionCreationControl;
 
         public void UpdateSelection([CanBeNull] WorldTile newSelection)
         {
@@ -137,6 +138,34 @@ namespace Input.World
                         }
                     }
 
+                    break;
+                case SelectionMode.RegionCreation:
+                    if (!select) return;
+                    if (worldTile == null) return;
+                    if (worldTile.worldArea == null) return;
+                    if (_regionCreationControl == null)
+                    {
+                        _regionCreationControl = GameObject.FindWithTag(Tags.RegionCreationComponent)
+                            .GetComponent<RegionCreationControl>();
+                    }
+
+                    if (_selectionTiles[worldTile.position].IsActive)
+                    {
+                        if (_regionCreationControl.RemoveArea(worldTile.worldArea))
+                        {
+                            ClearSelection(worldTile.worldArea.tiles);
+                        }
+                    }
+                    else
+                    {
+                        if (_regionCreationControl.AddArea(worldTile.worldArea))
+                        {
+                            foreach (var tile in worldTile.worldArea.tiles)
+                            {
+                                _selectionTiles[tile.position].SetActive(true);
+                            }
+                        }
+                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(selectionModeControl.CurrentMode),

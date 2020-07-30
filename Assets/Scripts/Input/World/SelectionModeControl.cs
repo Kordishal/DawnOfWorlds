@@ -49,7 +49,11 @@ namespace Input.World
                     break;
                 case SelectionMode.AreaCreation:
                     areaSelectionMode.interactable = !enable;
-                    ChangeAreaDetailsComponentStatus(enable);
+                    ChangeAreaDetailsComponentStatus(!enable);
+                    break;
+                case SelectionMode.RegionCreation:
+                    regionSelectionMode.interactable = !enable;
+                    ChangeRegionDetailsComponentStatus(!enable);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);

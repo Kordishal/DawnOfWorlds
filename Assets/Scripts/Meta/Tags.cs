@@ -11,6 +11,7 @@ namespace Meta
         public const string MainCamera = "MainCamera";
         public const string TileDetailsComponent = "TileDetailsComponent";
         public const string AreaCreationComponent = "AreaCreationComponent";
+        public const string RegionCreationComponent = "RegionCreationComponent";
         public const string PowerButtonPanel = "PowerButtonPanel";
     }
 }

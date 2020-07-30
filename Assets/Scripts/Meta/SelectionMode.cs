@@ -5,6 +5,7 @@ namespace Meta
         Tile,
         Area,
         Region,
-        AreaCreation
+        AreaCreation,
+        RegionCreation
     }
 }

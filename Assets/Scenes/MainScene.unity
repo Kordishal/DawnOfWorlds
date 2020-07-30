@@ -1196,8 +1196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 258631241}
-  powerPanel: {fileID: 2166870304517741894, guid: 53bd2bd1fb99802219163794ce732e1e, type: 3}
-  mode: 2
+  powerPanel: {fileID: 1375243390808813362, guid: 0e428c5588917f5f59833232f1233e33, type: 3}
+  mode: 4
   selectionModeControl: {fileID: 1875030888}
 --- !u!114 &805063841
 MonoBehaviour:
