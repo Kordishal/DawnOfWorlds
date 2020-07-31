@@ -1,6 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Meta;
+using Meta.EventArgs;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +29,9 @@ namespace Input.World
             ChangeMode(CurrentMode, false);
             ChangeMode(newMode, true);
             selectionDisplayControl.ChangeSelectionMode(CurrentMode, newMode);
+            var oldMode = CurrentMode;
             CurrentMode = newMode;
+            ChangedSelectionMode(oldMode, newMode);
         }
 
         private void ChangeMode(SelectionMode mode, bool enable)
@@ -108,6 +111,13 @@ namespace Input.World
             }
 
             _regionDetailsControl.SetActive(newStatus);
+        }
+
+        public event EventHandler<ChangeSelectionModeEventArgs> OnChangedSelectionMode;
+
+        private void ChangedSelectionMode(SelectionMode oldMode, SelectionMode newMode)
+        {
+            OnChangedSelectionMode?.Invoke(this, new ChangeSelectionModeEventArgs(oldMode, newMode));
         }
     }
 }

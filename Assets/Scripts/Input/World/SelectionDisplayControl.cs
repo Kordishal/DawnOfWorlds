@@ -19,10 +19,10 @@ namespace Input.World
 
         [CanBeNull] public WorldTile selectedTile;
 
-        [CanBeNull] private WorldArea SelectedArea => selectedTile == null ? null : selectedTile.worldArea;
+        [CanBeNull] public WorldArea SelectedArea => selectedTile == null ? null : selectedTile.worldArea;
 
         [CanBeNull]
-        private WorldRegion SelectedRegion => selectedTile == null ? null :
+        public WorldRegion SelectedRegion => selectedTile == null ? null :
             selectedTile.worldArea == null ? null : selectedTile.worldArea.worldRegion;
 
         private Dictionary<Position, SelectionDisplayTile> _selectionTiles;

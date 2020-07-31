@@ -4,7 +4,7 @@ using Model.Geo.Features.Climate;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Input.Menu
+namespace Input.Dropdowns
 {
     public class ClimateDropdown : MonoBehaviour
     {
@@ -28,6 +28,13 @@ namespace Input.Menu
             if (_dropdown == null)
                 _dropdown = GetComponent<Dropdown>();
             _dropdown.value = (int) climate;
+        }
+
+        public Climate CurrentValue()
+        {
+            if (_dropdown == null)
+                _dropdown = GetComponent<Dropdown>();
+            return (Climate) _dropdown.value;
         }
 
         private void OnValueChanged(int value)
