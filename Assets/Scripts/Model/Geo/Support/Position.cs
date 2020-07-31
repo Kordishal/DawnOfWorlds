@@ -37,6 +37,16 @@ namespace Model.Geo.Support
             return false;
         }
 
+
+        public Position North() => new Position(x + 1, y);
+        public Position NorthEast() => new Position(x + 1, y + 1);
+        public Position East() => new Position(x, y + 1);
+        public Position SouthEast() => new Position(x - 1, y + 1);
+        public Position South() => new Position(x - 1, y);
+        public Position SouthWest() => new Position(x - 1, y - 1);
+        public Position West() => new Position(x, y - 1);
+        public Position NorthWest() => new Position(x + 1, y - 1);
+
         protected bool Equals(Position other)
         {
             return x == other.x && y == other.y;

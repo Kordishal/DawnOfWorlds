@@ -13,8 +13,10 @@ namespace SaveSystem.Model
         public Position position;
 
         public int area;
-        
+
+        public TileType type;
         public Biome biome;
+        
         public List<WeatherEffect> weatherEffects;
 
 

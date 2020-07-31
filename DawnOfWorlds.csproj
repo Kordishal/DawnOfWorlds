@@ -109,6 +109,8 @@
      <Compile Include="Assets\Scripts\SaveSystem\Model\WorldRegionData.cs" />
      <Compile Include="Assets\Scripts\SaveSystem\Model\WorldData.cs" />
      <Compile Include="Assets\Scripts\SaveSystem\Model\SaveData.cs" />
+     <Compile Include="Assets\Scripts\Model\Geo\Features\Terrain\TileType.cs" />
+     <Compile Include="Assets\Scripts\Meta\SpriteTags.cs" />
      <None Include="Assets\Scripts\DawnOfWorlds.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

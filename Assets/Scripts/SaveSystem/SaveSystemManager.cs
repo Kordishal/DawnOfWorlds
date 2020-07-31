@@ -101,6 +101,7 @@ namespace SaveSystem
                     position = worldTile.position,
                     biome = worldTile.biome,
                     weatherEffects = worldTile.weatherEffects,
+                    type = worldTile.type,
                     area = areaId
                 };
                 save.worldData.tileData.Add(tileData);
@@ -202,6 +203,7 @@ namespace SaveSystem
             foreach (var tile in _tiles)
             {
                 var tileData = tileDict[tile.position];
+                tile.type = tileData.type;
                 tile.biome = tileData.biome;
                 tile.weatherEffects = tileData.weatherEffects;
                 if (tileData.area != -1)
@@ -211,6 +213,7 @@ namespace SaveSystem
             _regionDict = null;
             _loadedWorldAreas = null;
             _loadedWorldRegions = null;
+            _gameWorld.GetComponent<WorldMap>().UpdateAllSprites();
         }
 
 

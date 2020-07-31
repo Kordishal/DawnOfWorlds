@@ -54,10 +54,13 @@ MonoBehaviour:
     x: 0
     y: 0
   worldArea: {fileID: 0}
+  type: 0
   biome:
     name: Barren
     description: There is really nothing here.
   weatherEffects: []
+  renderer: {fileID: 8347306287007874979}
+  worldMap: {fileID: 0}
 --- !u!212 &8347306287007874979
 SpriteRenderer:
   m_ObjectHideFlags: 0
