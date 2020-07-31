@@ -4,18 +4,21 @@ using Meta.EventArgs;
 using Model.Geo.Features.Climate;
 using Model.Geo.Features.Terrain;
 using Model.Geo.Support;
+using Player;
 using UnityEngine;
 
 namespace Model.Geo.Organization
 {
+    [Serializable]
     public sealed class WorldTile : MonoBehaviour
     {
         public Position position;
-        public WorldMap worldMap;
         public WorldArea worldArea;
-        public List<WeatherEffect> weatherEffects;
         public Biome biome;
+        public List<WeatherEffect> weatherEffects;
 
+        public Climate Climate => worldArea != null ? worldArea.climate : ProfileSettings.DefaultClimate;
+        
         private void Start()
         {
             name = "Tile (" + position.x + ", " + position.y + ")";

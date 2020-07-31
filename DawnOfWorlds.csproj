@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Model\Deity\Deity.cs" />
      <Compile Include="Assets\Scripts\Meta\EventArgs\ClimateEventArgs.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Support\Position.cs" />
+     <Compile Include="Assets\Scripts\Meta\EventArgs\ChangeSelectionModeEventArgs.cs" />
      <Compile Include="Assets\Scripts\Meta\EventArgs\WeatherEffectEventArgs.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Features\Terrain\Biome.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Features\Climate\WeatherEffect.cs" />
@@ -92,6 +93,7 @@
      <Compile Include="Assets\Scripts\Input\World\RegionCreationControl.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityViewPortControl.cs" />
      <Compile Include="Assets\Scripts\Input\World\SelectionDisplayControl.cs" />
+     <Compile Include="Assets\Scripts\SaveSystem\SaveSystemManager.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\DeityEditorControl.cs" />
      <Compile Include="Assets\Scripts\Input\PowerControls\PowerButtonScript.cs" />
      <Compile Include="Assets\Scripts\Input\PowerControls\ShapeClimateControl.cs" />
@@ -102,7 +104,11 @@
      <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldMap.cs" />
      <Compile Include="Assets\Scripts\Input\Menu\PlayerEditorControl.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldTile.cs" />
-     <Compile Include="Assets\Scripts\Meta\EventArgs\ChangeSelectionModeEventArgs.cs" />
+     <Compile Include="Assets\Scripts\SaveSystem\Model\WorldTileData.cs" />
+     <Compile Include="Assets\Scripts\SaveSystem\Model\WorldAreaData.cs" />
+     <Compile Include="Assets\Scripts\SaveSystem\Model\WorldRegionData.cs" />
+     <Compile Include="Assets\Scripts\SaveSystem\Model\WorldData.cs" />
+     <Compile Include="Assets\Scripts\SaveSystem\Model\SaveData.cs" />
      <None Include="Assets\Scripts\DawnOfWorlds.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
