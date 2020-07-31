@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Player;
 
 namespace Model.Geo.Organization
 {
@@ -59,6 +60,7 @@ namespace Model.Geo.Organization
         {
             area.areaName = _name;
             area.tiles = _tiles;
+            area.climate = ProfileSettings.DefaultClimate;
             foreach (var worldTile in _tiles)
             {
                 worldTile.worldArea = area;

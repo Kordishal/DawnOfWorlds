@@ -106,6 +106,7 @@ namespace Input.PowerControls
                 case SelectionMode.Region:
                     Debug.Assert(_selectionDisplayControl.SelectedArea != null, "Area should be selected!");
                     // TODO: Should this be possible if not all areas are of the same distance to the new climate?
+                    // Probably not, but for now it is.
                     if (_selectionDisplayControl.SelectedRegion != null)
                     {
                         var areas = _selectionDisplayControl.SelectedRegion.areas;
