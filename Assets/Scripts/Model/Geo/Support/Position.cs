@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Model.Geo.Support
 {
@@ -46,7 +47,20 @@ namespace Model.Geo.Support
         public Position SouthWest() => new Position(x - 1, y - 1);
         public Position West() => new Position(x, y - 1);
         public Position NorthWest() => new Position(x + 1, y - 1);
-
+        
+        public IEnumerable<Position> AllDirections() => new List<Position>()
+        {
+            North(),
+            NorthEast(),
+            East(),
+            SouthEast(),
+            South(),
+            SouthWest(),
+            West(),
+            NorthWest()
+        };
+        
+        
         protected bool Equals(Position other)
         {
             return x == other.x && y == other.y;

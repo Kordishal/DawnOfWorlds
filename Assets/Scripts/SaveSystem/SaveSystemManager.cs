@@ -53,7 +53,8 @@ namespace SaveSystem
 
             foreach (var file in Directory.EnumerateFiles(_path))
             {
-                savesDropdown.options.Add(new Dropdown.OptionData(file));
+                //TODO: Not platform independent!
+                savesDropdown.options.Add(new Dropdown.OptionData(file.Substring(file.LastIndexOf('/') + 1)));
                 var regex = new Regex("saveFile(\\d+).json");
                 var match = regex.Match(file);
                 var num = int.Parse(match.Groups[1].Value);

@@ -55,19 +55,11 @@ namespace Model.Geo.Organization
         private IEnumerable<WorldTile> AllNeighbours(WorldTile tile)
         {
             var position = tile.position;
-            return new List<WorldTile>()
-            {
-                _tiles[position.East()],
-                _tiles[position.NorthEast()],
-                _tiles[position.North()],
-                _tiles[position.NorthWest()],
-                _tiles[position.West()],
-                _tiles[position.SouthWest()],
-                _tiles[position.South()],
-                _tiles[position.SouthWest()],
-            };
+            return from direction in position.AllDirections()
+                where _tiles.ContainsKey(direction)
+                select _tiles[direction];
         }
-        
+
         public void UpdateSprite(WorldTile tile)
         {
             if (tile.type == TileType.Continental)

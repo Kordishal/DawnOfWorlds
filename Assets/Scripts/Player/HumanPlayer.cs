@@ -11,7 +11,7 @@ namespace Player
             Data.Name = ProfileSettings.Name;
             if (Data.ActiveDeity == null)
             {
-                Data.ActiveDeity = new Deity(0, "Odin", 0);
+                Data.ActiveDeity = new Deity(0, "Odin", 1000);
             }
         }
     }

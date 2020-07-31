@@ -14,7 +14,7 @@ namespace Player
             Data = new PlayerData();
             DontDestroyOnLoad(gameObject);
             Data.Name = "Session Player 1";
-            Data.ActiveDeity = new Deity(2, "Freya", 0);
+            Data.ActiveDeity = new Deity(2, "Freya", 1000);
         }
 
 

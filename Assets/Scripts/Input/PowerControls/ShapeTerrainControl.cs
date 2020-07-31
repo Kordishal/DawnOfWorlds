@@ -64,52 +64,53 @@ namespace Input.PowerControls
             _selectionDisplayControl.AreaSelectionChange += OnAreaSelectionChange;
             _selectionDisplayControl.RegionSelectionChange += OnRegionSelectionChange;
 
-            submergeSelectionButton.onClick.AddListener(delegate
+            submergeSelectionButton.onClick.AddListener(SubmitTypeChange);
+            raiseSelectionButton.onClick.AddListener(SubmitTypeChange);
+        }
+
+        private void SubmitTypeChange()
+        {
+            switch (_selectionModeControl.CurrentMode)
             {
-                switch (_selectionModeControl.CurrentMode)
-                {
-                    case SelectionMode.Tile:
-                        if (_selectionDisplayControl.selectedTile != null)
-                            if (_sessionManager.SpendPoints(ChangeTypeCost))
-                                _selectionDisplayControl.selectedTile.ChangeType(true);
-                        break;
-                    case SelectionMode.Area:
-                        var area = _selectionDisplayControl.SelectedArea;
-                        if (area != null)
+                case SelectionMode.Tile:
+                    if (_selectionDisplayControl.selectedTile != null)
+                        if (_sessionManager.SpendPoints(ChangeTypeCost))
+                            _selectionDisplayControl.selectedTile.ChangeType(true);
+                    break;
+                case SelectionMode.Area:
+                    var area = _selectionDisplayControl.SelectedArea;
+                    if (area != null)
+                    {
+                        var cost = area.tiles.Count * ChangeTypeCost * AreaChangeTypeDiscount;
+                        if (_sessionManager.SpendPoints(cost))
                         {
-                            var cost = area.tiles.Count * ChangeTypeCost *
-                                       AreaChangeTypeDiscount;
-                            if (_sessionManager.SpendPoints(cost))
-                            {
-                                area.tiles.ForEach(t => t.ChangeType(false));
-                                area.tiles.ForEach(t => t.UpdateSprite());
-                            }
+                            area.tiles.ForEach(t => t.ChangeType(false));
+                            area.tiles.ForEach(t => t.UpdateSprite());
                         }
+                    }
 
-                        break;
-                    case SelectionMode.Region:
-                        var region = _selectionDisplayControl.SelectedRegion;
-                        if (region != null)
+                    break;
+                case SelectionMode.Region:
+                    var region = _selectionDisplayControl.SelectedRegion;
+                    if (region != null)
+                    {
+                        var tiles = region.areas.SelectMany(a => a.tiles).ToList();
+                        var cost = tiles.Count() * ChangeTypeCost * RegionChangeTypeDiscount;
+                        if (_sessionManager.SpendPoints(cost))
                         {
-                            var tiles = region.areas.SelectMany(a => a.tiles).ToList();
-                            var cost = tiles.Count() * ChangeTypeCost *
-                                       RegionChangeTypeDiscount;
-                            if (_sessionManager.SpendPoints(cost))
-                            {
-                                tiles.ForEach(t => t.ChangeType(false));
-                                tiles.ForEach(t => t.UpdateSprite());
-                            }
+                            tiles.ForEach(t => t.ChangeType(false));
+                            tiles.ForEach(t => t.UpdateSprite());
                         }
+                    }
 
-                        break;
-                    case SelectionMode.AreaCreation:
-                        break;
-                    case SelectionMode.RegionCreation:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            });
+                    break;
+                case SelectionMode.AreaCreation:
+                    break;
+                case SelectionMode.RegionCreation:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void OnTileSelectionChange(object sender, SelectedWorldTile tile)
@@ -142,6 +143,7 @@ namespace Input.PowerControls
             {
                 raiseSelectionButton.interactable = false;
                 submergeSelectionButton.interactable = false;
+                return;
             }
 
             if (area.Area.IsContinental())
@@ -167,6 +169,7 @@ namespace Input.PowerControls
             {
                 raiseSelectionButton.interactable = false;
                 submergeSelectionButton.interactable = false;
+                return;
             }
 
             if (region.Region.areas.Any(a => a.IsCoastal()))
