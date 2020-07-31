@@ -15,6 +15,7 @@ namespace SaveSystem.Model
         public int area;
 
         public TileType type;
+        public TerrainType terrain;
         public Biome biome;
         
         public List<WeatherEffect> weatherEffects;

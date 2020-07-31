@@ -9,6 +9,8 @@ namespace Input.World
     public class TileDetailsControl : MonoBehaviour
     {
         public Text tileName;
+        public Text tileType;
+        public Text tileTerrainType;
         public Text tileBiome;
         public Text tileWeatherEffects;
 
@@ -32,6 +34,8 @@ namespace Input.World
         private void UpdateTexts(WorldTile worldTile)
         {
             tileName.text = worldTile.name;
+            tileType.text = worldTile.type.ToString();
+            tileTerrainType.text = worldTile.terrain.ToString();
             tileBiome.text = worldTile.biome.ToString();
             tileWeatherEffects.text = string.Join(", ", worldTile.weatherEffects);
         }

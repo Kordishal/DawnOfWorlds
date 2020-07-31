@@ -44,7 +44,7 @@ namespace Model.Geo.Organization
                     var worldTile = tile.GetComponent<WorldTile>();
                     worldTile.position = new Position(i, j);
                     worldTile.transform.position = new Vector3(i * PositionFactor, j * PositionFactor, 20);
-                    worldTile.WorldTileChanged += tileDetailsControl.OnTileDataUpdate;
+                    worldTile.OnWorldTileChanged += tileDetailsControl.OnTileDataUpdate;
                     worldTile.worldMap = this;
                     _tiles[worldTile.position] = worldTile;
                 }

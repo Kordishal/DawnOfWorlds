@@ -15,23 +15,24 @@ namespace Model.Geo.Organization
         public Position position;
         
         public WorldArea worldArea;
-
-        public TileType type;
         
+        public TileType type;
+        public TerrainType terrain;
         public Biome biome;
+        
+        public Climate Climate => worldArea != null ? worldArea.climate : ProfileSettings.DefaultClimate;
         public List<WeatherEffect> weatherEffects;
 
         public new SpriteRenderer renderer;
         public WorldMap worldMap;
         
-        public Climate Climate => worldArea != null ? worldArea.climate : ProfileSettings.DefaultClimate;
-
         private void Start()
         {
             name = "Tile (" + position.x + ", " + position.y + ")";
             weatherEffects = new List<WeatherEffect>();
             biome = new Biome("Barren", "There is no life here.");
             type = TileType.Continental;
+            terrain = TerrainType.Flat;
         }
 
         public void ChangeType(bool updateSprite)
@@ -46,9 +47,16 @@ namespace Model.Geo.Organization
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
-            }
+            };
+            WorldTileChanged(this);
             if (updateSprite)
                 worldMap.UpdateSprite(this);
+        }
+
+        public void ChangeTerrain(TerrainType terrainType)
+        {
+            terrain = terrainType;
+            WorldTileChanged(this);
         }
 
         public void UpdateSprite()
@@ -60,7 +68,7 @@ namespace Model.Geo.Organization
         {
             if (weatherEffects.Remove(effect))
             {
-                OnWorldTileChanged(this);
+                WorldTileChanged(this);
             }
         }
 
@@ -68,15 +76,15 @@ namespace Model.Geo.Organization
         {
             if (weatherEffects.Contains(effect)) return;
             weatherEffects.Add(effect);
-            OnWorldTileChanged(this);
+            WorldTileChanged(this);
         }
 
-        public event EventHandler<UpdatedWorldTile> WorldTileChanged;
+        public event EventHandler<UpdatedWorldTile> OnWorldTileChanged;
 
-        private void OnWorldTileChanged(WorldTile e)
+        private void WorldTileChanged(WorldTile e)
         {
             var args = new UpdatedWorldTile(e);
-            WorldTileChanged?.Invoke(this, args);
+            OnWorldTileChanged?.Invoke(this, args);
         }
 
         public override string ToString()

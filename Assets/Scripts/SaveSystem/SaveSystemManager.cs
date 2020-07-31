@@ -103,6 +103,7 @@ namespace SaveSystem
                     biome = worldTile.biome,
                     weatherEffects = worldTile.weatherEffects,
                     type = worldTile.type,
+                    terrain = worldTile.terrain,
                     area = areaId
                 };
                 save.worldData.tileData.Add(tileData);
@@ -205,6 +206,7 @@ namespace SaveSystem
             {
                 var tileData = tileDict[tile.position];
                 tile.type = tileData.type;
+                tile.terrain = tileData.terrain;
                 tile.biome = tileData.biome;
                 tile.weatherEffects = tileData.weatherEffects;
                 if (tileData.area != -1)
