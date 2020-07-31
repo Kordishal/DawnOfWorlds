@@ -34,7 +34,7 @@ namespace Model.Geo.Organization
             type = TileType.Continental;
         }
 
-        public void ChangeType()
+        public void ChangeType(bool updateSprite)
         {
             switch (type)
             {
@@ -47,6 +47,12 @@ namespace Model.Geo.Organization
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            if (updateSprite)
+                worldMap.UpdateSprite(this);
+        }
+
+        public void UpdateSprite()
+        {
             worldMap.UpdateSprite(this);
         }
 

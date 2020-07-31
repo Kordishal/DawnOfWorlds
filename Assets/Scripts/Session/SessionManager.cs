@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Meta;
 using Player;
@@ -38,6 +39,7 @@ namespace Session
             return true;
         }
 
+        public bool SpendPoints(float cost) => SpendPoints((int) Math.Floor(cost));
 
         private void EndTurn()
         {
