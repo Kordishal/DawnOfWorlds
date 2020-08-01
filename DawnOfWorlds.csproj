@@ -61,7 +61,7 @@
      <Compile Include="Assets\Scripts\Input\Menu\MainMenuControl.cs" />
      <Compile Include="Assets\Scripts\Input\Dropdowns\WeatherEffectDropdown.cs" />
      <Compile Include="Assets\Scripts\Meta\Default.cs" />
-     <Compile Include="Assets\Scripts\Model\Geo\Features\Terrain\TerrainFeature.cs" />
+     <Compile Include="Assets\Scripts\Model\Powers\ShapeTerrain\TerrainFeatureAction.cs" />
      <Compile Include="Assets\Scripts\Player\IPlayer.cs" />
      <Compile Include="Assets\Scripts\Meta\EventArgs\SelectedWorldArea.cs" />
      <Compile Include="Assets\Scripts\Input\World\TileDetailsControl.cs" />
@@ -113,6 +113,9 @@
      <Compile Include="Assets\Scripts\Input\Menu\PlayerEditorControl.cs" />
      <Compile Include="Assets\Scripts\SaveSystem\Model\WorldAreaData.cs" />
      <Compile Include="Assets\Scripts\Model\Geo\Organization\WorldTile.cs" />
+     <Compile Include="Assets\Scripts\Input\Dropdowns\TerrainFeatureDropdown.cs" />
+     <Compile Include="Assets\Scripts\Meta\EventArgs\TerrainFeatureEventArgs.cs" />
+     <Compile Include="Assets\Scripts\Model\Geo\Features\Terrain\TerrainFeature.cs" />
      <None Include="Assets\Scripts\DawnOfWorlds.asmdef" />
  <Reference Include="Unity.InputSystem">
  <HintPath>/home/jonas/Documents/projects/unity/DawnOfWorlds/DawnOfWorlds/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>

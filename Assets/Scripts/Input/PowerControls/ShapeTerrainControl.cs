@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Input.Dropdowns;
 using Input.World;
 using Meta;
 using Meta.EventArgs;
@@ -27,16 +28,63 @@ namespace Input.PowerControls
         public Button raiseHillsButton;
         public Button raiseMountainsButton;
 
+        private TerrainFeatureDropdown _terrainFeatureDropdown;
+        public Button createTerrainFeature;
+        public InputField terrainFeatureName;
+        public InputField terrainFeatureDescription;
+
         private SelectionModeControl _selectionModeControl;
         private SelectionDisplayControl _selectionDisplayControl;
         private SessionManager _sessionManager;
+        private bool _nameValid;
+        private bool _descriptionValid;
+
+        private bool NameValid
+        {
+            get => _nameValid;
+            set
+            {
+                if (value)
+                {
+                    if (DescriptionValid && SelectedActionValid)
+                        createTerrainFeature.interactable = true;
+                }
+                else
+                {
+                    createTerrainFeature.interactable = false;
+                }
+
+                _nameValid = value;
+            }
+        }
+
+        private bool DescriptionValid
+        {
+            get => _descriptionValid;
+            set
+            {
+                if (value)
+                {
+                    if (NameValid && SelectedActionValid)
+                        createTerrainFeature.interactable = true;
+                }
+                else
+                {
+                    createTerrainFeature.interactable = false;
+                }
+
+                _descriptionValid = value;
+            }
+        }
+
+        private bool SelectedActionValid => _terrainFeatureDropdown.IsActive();
 
         private void Start()
         {
             _selectionDisplayControl = GameObject.FindWithTag(Tags.MainCamera).GetComponent<SelectionDisplayControl>();
             _selectionModeControl = GameObject.FindWithTag(Tags.PowerButtonPanel).GetComponent<SelectionModeControl>();
             _sessionManager = GameObject.FindWithTag(Tags.SessionManager).GetComponent<SessionManager>();
-
+            
             _selectionDisplayControl.TileSelectionChange += OnTileSelectionChange;
             _selectionDisplayControl.AreaSelectionChange += OnAreaSelectionChange;
             _selectionDisplayControl.RegionSelectionChange += OnRegionSelectionChange;
@@ -46,6 +94,31 @@ namespace Input.PowerControls
 
             raiseHillsButton.onClick.AddListener(RaiseHills);
             raiseMountainsButton.onClick.AddListener(RaiseMountains);
+
+            
+            _terrainFeatureDropdown = GetComponentInChildren<TerrainFeatureDropdown>();
+            if (_selectionDisplayControl.selectedTile != null)
+                _terrainFeatureDropdown.UpdateElements(_selectionDisplayControl.selectedTile);
+            createTerrainFeature.onClick.AddListener(CreateTerrainFeature);
+
+            terrainFeatureName.onEndEdit.AddListener(delegate(string text) { NameValid = text != ""; });
+            terrainFeatureDescription.onEndEdit.AddListener(delegate(string text) { DescriptionValid = text != ""; });
+            createTerrainFeature.interactable = false;
+        }
+
+        private void CreateTerrainFeature()
+        {
+            var tile = _selectionDisplayControl.selectedTile;
+            if (tile == null) return;
+            var feature = _terrainFeatureDropdown.CurrentValue();
+            if (!_sessionManager.SpendPoints(feature.cost)) return;
+            var newFeature = new TerrainFeature
+            {
+                name = terrainFeatureName.text, 
+                featureType = feature.objectName,
+                description = terrainFeatureDescription.text
+            };
+            tile.AddTerrainFeature(newFeature);
         }
 
         private void RaiseHills()
@@ -64,6 +137,7 @@ namespace Input.PowerControls
                                     tile.ChangeTerrain(TerrainType.Hilly);
                                     raiseHillsButton.interactable = false;
                                 }
+
                                 break;
                             case TerrainType.Hilly:
                             case TerrainType.Mountainous:
@@ -127,8 +201,8 @@ namespace Input.PowerControls
                                 {
                                     tile.ChangeTerrain(TerrainType.Mountainous);
                                     raiseMountainsButton.interactable = false;
-
                                 }
+
                                 break;
                             case TerrainType.Hilly:
                                 if (_sessionManager.SpendPoints(RaiseTerrainCost))
@@ -136,6 +210,7 @@ namespace Input.PowerControls
                                     tile.ChangeTerrain(TerrainType.Mountainous);
                                     raiseMountainsButton.interactable = false;
                                 }
+
                                 break;
                             case TerrainType.Mountainous:
                                 break;
@@ -235,15 +310,17 @@ namespace Input.PowerControls
             }
         }
 
-        private void OnTileSelectionChange(object sender, SelectedWorldTile tile)
+        private void OnTileSelectionChange(object sender, SelectedWorldTile selected)
         {
-            if (tile.Tile == null)
+            var tile = selected.Tile;
+            _terrainFeatureDropdown.UpdateElements(tile);
+            if (tile == null)
             {
                 DeactivateAll();
                 return;
             }
-
-            switch (tile.Tile.type)
+            
+            switch (tile.type)
             {
                 case TileType.Continental:
                     raiseSelectionButton.interactable = false;
@@ -257,7 +334,7 @@ namespace Input.PowerControls
                     throw new ArgumentOutOfRangeException();
             }
 
-            switch (tile.Tile.terrain)
+            switch (tile.terrain)
             {
                 case TerrainType.Flat:
                     raiseHillsButton.interactable = true;
@@ -340,7 +417,7 @@ namespace Input.PowerControls
                 raiseSelectionButton.interactable = true;
                 submergeSelectionButton.interactable = false;
             }
-            
+
             if (region.Region.areas.SelectMany(a => a.tiles).Any(t => t.terrain == TerrainType.Flat))
             {
                 raiseHillsButton.interactable = true;
@@ -364,6 +441,7 @@ namespace Input.PowerControls
             submergeSelectionButton.interactable = false;
             raiseHillsButton.interactable = false;
             raiseMountainsButton.interactable = false;
+            createTerrainFeature.interactable = false;
         }
     }
 }

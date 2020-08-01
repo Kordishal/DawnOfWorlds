@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
 using Model.Geo.Features.Climate;
+using Model.Geo.Features.Terrain;
+using Model.Powers.ShapeTerrain;
 using UnityEngine;
 
 namespace Model.Geo.Features
@@ -9,14 +11,17 @@ namespace Model.Geo.Features
     {
         private static FeatureManager _instance;
         public static FeatureManager GetInstance() => _instance ?? (_instance = new FeatureManager());
-
-
-        private const string SOFolder = "ScriptableObjects";
-        private const string TFFolder = "TerrainFeatures";
+        private const string WeatherEffectsFolder = "WeatherEffects";
+        private const string TerrainFeaturesFolder = "TerrainFeatures";
         
-        public WeatherEffect LoadWeatherEffects()
+        public IEnumerable<WeatherEffect> LoadWeatherEffects()
         {
-            return Resources.Load<WeatherEffect>(SOFolder + "/" + TFFolder + "/SmallIsland");
+            return Resources.LoadAll<WeatherEffect>(WeatherEffectsFolder);
+        }
+
+        public IEnumerable<TerrainFeatureAction> LoadTerrainFeatures()
+        {
+            return Resources.LoadAll<TerrainFeatureAction>(TerrainFeaturesFolder);
         }
     }
 }

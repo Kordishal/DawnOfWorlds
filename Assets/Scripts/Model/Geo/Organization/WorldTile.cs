@@ -50,7 +50,7 @@ namespace Model.Geo.Organization
                 default:
                     throw new ArgumentOutOfRangeException();
             };
-            WorldTileChanged(this);
+            WorldTileChanged();
             if (updateSprite)
                 worldMap.UpdateSprite(this);
         }
@@ -58,7 +58,7 @@ namespace Model.Geo.Organization
         public void ChangeTerrain(TerrainType terrainType)
         {
             terrain = terrainType;
-            WorldTileChanged(this);
+            WorldTileChanged();
         }
 
         public void UpdateSprite()
@@ -66,11 +66,17 @@ namespace Model.Geo.Organization
             worldMap.UpdateSprite(this);
         }
 
+        public void AddTerrainFeature(TerrainFeature terrainFeature)
+        {
+            terrainFeatures.Add(terrainFeature);
+            WorldTileChanged();
+        }
+
         public void RemoveWeatherEffect(WeatherEffect effect)
         {
             if (weatherEffects.Remove(effect))
             {
-                WorldTileChanged(this);
+                WorldTileChanged();
             }
         }
 
@@ -78,15 +84,14 @@ namespace Model.Geo.Organization
         {
             if (weatherEffects.Contains(effect)) return;
             weatherEffects.Add(effect);
-            WorldTileChanged(this);
+            WorldTileChanged();
         }
 
         public event EventHandler<UpdatedWorldTile> OnWorldTileChanged;
 
-        private void WorldTileChanged(WorldTile e)
+        private void WorldTileChanged()
         {
-            var args = new UpdatedWorldTile(e);
-            OnWorldTileChanged?.Invoke(this, args);
+            OnWorldTileChanged?.Invoke(this, new UpdatedWorldTile(this));
         }
 
         public override string ToString()

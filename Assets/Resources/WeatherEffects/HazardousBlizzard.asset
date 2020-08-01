@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93c10f2ba784a5bac59f4f5ff7c4670, type: 3}
-  m_Name: SmallIsland
+  m_Script: {fileID: 11500000, guid: 7a23e856b72d4758b1911abcf0e6301d, type: 3}
+  m_Name: HazardousBlizzard
   m_EditorClassIdentifier: 
-  objectName: Small Name
-  cost: 2
-  creationActionName: Raise Small Island
-  allowedTileType: 1
-  allowedTerrainTypes: 
-  description: A small island in the ocean.
+  objectName: Hazardous Blizzards
+  description: This region is known for their very strong and dangerous blizzards.

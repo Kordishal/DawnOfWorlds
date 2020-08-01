@@ -15,7 +15,6 @@ MonoBehaviour:
   objectName: Large Island
   cost: 4
   creationActionName: Raise Large Island
-  allowedTileTypes: Oceanic
-  allowedTerrainFeatures:
-  - Any
+  allowedTileType: 1
+  allowedTerrainTypes: 
   description: A large island in the sea.
