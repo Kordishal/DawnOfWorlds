@@ -1,40 +1,23 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Model.Geo.Features.Climate;
-using Model.Geo.Features.Terrain;
 using UnityEngine;
 
 namespace Model.Geo.Features
 {
-    public static class FeatureManager
+    public class FeatureManager
     {
-        private static readonly string BasePath = Application.streamingAssetsPath;
-        private const string PathWeatherEffects = "tiles/effects/weather.json";
-        private const string PathBiomes = "tiles/effects/biomes.json";
-        public static List<WeatherEffect> LoadWeatherEffects()
-        {
-            var path = Path.Combine(BasePath, PathWeatherEffects);
-            var text = File.ReadAllText(path);
-            return JsonUtility.FromJson<WeatherEffectCollection>(text).effects;
-        }
-        public static List<Biome> LoadBiomes()
-        {
-            var path = Path.Combine(BasePath, PathWeatherEffects);
-            var text = File.ReadAllText(path);
-            return JsonUtility.FromJson<BiomeCollection>(text).biomes;
-        }
+        private static FeatureManager _instance;
+        public static FeatureManager GetInstance() => _instance ?? (_instance = new FeatureManager());
 
-        [Serializable]
-        private class WeatherEffectCollection
-        {
-            public List<WeatherEffect> effects;
-        }
 
-        [Serializable]
-        private class BiomeCollection
+        private const string SOFolder = "ScriptableObjects";
+        private const string TFFolder = "TerrainFeatures";
+        
+        public WeatherEffect LoadWeatherEffects()
         {
-            public List<Biome> biomes;
+            var path = Path.Combine(SOFolder, TFFolder, "SmallIsland");
+            return Resources.Load<WeatherEffect>(path);
         }
     }
 }

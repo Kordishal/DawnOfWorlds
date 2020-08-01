@@ -1,22 +1,17 @@
 using System;
+using UnityEngine;
 
 namespace Model.Geo.Features.Terrain
 {
-    [Serializable]
-    public class Biome
+    [CreateAssetMenu(fileName = "biome", menuName = "ScriptableObjects/Biome", order = 1)]
+    public class Biome : ScriptableObject
     {
-        public string name;
+        public string biomeName;
         public string description;
-
-        public Biome(string name, string description)
-        {
-            this.name = name;
-            this.description = description;
-        }
 
         public override string ToString()
         {
-            return name;
+            return biomeName;
         }
     }
 }

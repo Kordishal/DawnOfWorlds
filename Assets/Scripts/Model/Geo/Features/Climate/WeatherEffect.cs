@@ -1,16 +1,17 @@
 using System;
+using UnityEngine;
 
 namespace Model.Geo.Features.Climate
 {
-    [Serializable]
-    public class WeatherEffect
+    [CreateAssetMenu(fileName = "terrainFeature", menuName = "ScriptableObjects/WeatherEffect", order = 3)]
+    public class WeatherEffect : ScriptableObject
     {
-        public string name;
+        public string objectName;
         public string description;
         
         public override string ToString()
         {
-            return name;
+            return objectName;
         }
     }
 }

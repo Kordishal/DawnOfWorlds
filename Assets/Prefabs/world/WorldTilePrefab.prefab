@@ -55,9 +55,9 @@ MonoBehaviour:
     y: 0
   worldArea: {fileID: 0}
   type: 0
-  biome:
-    name: Barren
-    description: There is really nothing here.
+  terrain: 0
+  terrainFeatures: []
+  biome: {fileID: 11400000, guid: 7430afa88f62ad4c0b59e3070829c972, type: 2}
   weatherEffects: []
   renderer: {fileID: 8347306287007874979}
   worldMap: {fileID: 0}

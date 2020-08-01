@@ -18,6 +18,8 @@ namespace Model.Geo.Organization
         
         public TileType type;
         public TerrainType terrain;
+        public List<TerrainFeature> terrainFeatures;
+        
         public Biome biome;
         
         public Climate Climate => worldArea != null ? worldArea.climate : ProfileSettings.DefaultClimate;
@@ -30,7 +32,7 @@ namespace Model.Geo.Organization
         {
             name = "Tile (" + position.x + ", " + position.y + ")";
             weatherEffects = new List<WeatherEffect>();
-            biome = new Biome("Barren", "There is no life here.");
+            terrainFeatures = new List<TerrainFeature>();
             type = TileType.Continental;
             terrain = TerrainType.Flat;
         }

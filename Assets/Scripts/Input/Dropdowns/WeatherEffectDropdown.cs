@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Meta.EventArgs;
 using Model.Geo.Features;
 using Model.Geo.Features.Climate;
@@ -19,9 +20,13 @@ namespace Input.Dropdowns
             if (_dropdown == null)
                 _dropdown = GetComponent<Dropdown>();
 
-            _effects = FeatureManager.LoadWeatherEffects();
+            var manager = FeatureManager.GetInstance();
+            _effects = new List<WeatherEffect>();
+            var effect = manager.LoadWeatherEffects();
+            _dropdown.options.Add(new Dropdown.OptionData(effect.objectName));
+            
             foreach (var weatherEffect in _effects) 
-                _dropdown.options.Add(new Dropdown.OptionData(weatherEffect.name));
+                _dropdown.options.Add(new Dropdown.OptionData(weatherEffect.objectName));
             _dropdown.onValueChanged.AddListener(OnValueChanged);
             _dropdown.value = 1;
         }
@@ -30,7 +35,7 @@ namespace Input.Dropdowns
         {
             if (_dropdown == null)
                 _dropdown = GetComponent<Dropdown>();
-            _dropdown.value = _effects.FindIndex(w => w.name == weatherEffect.name);
+            _dropdown.value = _effects.FindIndex(w => w.objectName == weatherEffect.objectName);
         }
 
         public WeatherEffect CurrentValue()
