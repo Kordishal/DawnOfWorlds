@@ -20,9 +20,7 @@ namespace Input.Dropdowns
             if (_dropdown == null)
                 _dropdown = GetComponent<Dropdown>();
 
-            var manager = FeatureManager.GetInstance();
-            _effects = new List<WeatherEffect>();
-            var effect = manager.LoadWeatherEffects();
+            var effect = Resources.Load<WeatherEffect>("TerrainFeatures/SmallIsland");
             _dropdown.options.Add(new Dropdown.OptionData(effect.objectName));
             
             foreach (var weatherEffect in _effects) 

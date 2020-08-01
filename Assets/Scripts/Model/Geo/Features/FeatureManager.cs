@@ -16,8 +16,7 @@ namespace Model.Geo.Features
         
         public WeatherEffect LoadWeatherEffects()
         {
-            var path = Path.Combine(SOFolder, TFFolder, "SmallIsland");
-            return Resources.Load<WeatherEffect>(path);
+            return Resources.Load<WeatherEffect>(SOFolder + "/" + TFFolder + "/SmallIsland");
         }
     }
 }
