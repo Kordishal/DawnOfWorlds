@@ -12,6 +12,7 @@ namespace Input.World
         public Text tileType;
         public Text tileTerrainType;
         public Text tileBiome;
+        public Text tileTerrainFeature;
         public Text tileWeatherEffects;
 
         private WorldTile _currentDisplayedTile;
@@ -37,6 +38,7 @@ namespace Input.World
             tileType.text = worldTile.type.ToString();
             tileTerrainType.text = worldTile.terrain.ToString();
             tileBiome.text = worldTile.biome.ToString();
+            tileTerrainFeature.text = string.Join(", ", worldTile.terrainFeatures);
             tileWeatherEffects.text = string.Join(", ", worldTile.weatherEffects);
         }
 

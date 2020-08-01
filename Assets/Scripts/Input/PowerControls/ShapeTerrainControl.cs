@@ -5,6 +5,7 @@ using Input.World;
 using Meta;
 using Meta.EventArgs;
 using Model.Geo.Features.Terrain;
+using PowerSystems.Actions;
 using Session;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +39,8 @@ namespace Input.PowerControls
         private SessionManager _sessionManager;
         private bool _nameValid;
         private bool _descriptionValid;
+
+        private ActionSelectionDropdown _biomeSelectionDropdown;
 
         private bool NameValid
         {
@@ -104,6 +107,9 @@ namespace Input.PowerControls
             terrainFeatureName.onEndEdit.AddListener(delegate(string text) { NameValid = text != ""; });
             terrainFeatureDescription.onEndEdit.AddListener(delegate(string text) { DescriptionValid = text != ""; });
             createTerrainFeature.interactable = false;
+
+            _biomeSelectionDropdown = GetComponentInChildren<ActionSelectionDropdown>();
+            _biomeSelectionDropdown.SetFilter(new BiomeCreationActionFilter());
         }
 
         private void CreateTerrainFeature()
@@ -314,12 +320,13 @@ namespace Input.PowerControls
         {
             var tile = selected.Tile;
             _terrainFeatureDropdown.UpdateElements(tile);
+            _biomeSelectionDropdown.UpdateElements(tile);
             if (tile == null)
             {
                 DeactivateAll();
                 return;
             }
-            
+
             switch (tile.type)
             {
                 case TileType.Continental:

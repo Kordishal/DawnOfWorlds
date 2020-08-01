@@ -1,5 +1,5 @@
 using Model.Geo.Features.Terrain;
-using Model.Powers.ShapeTerrain;
+using PowerSystems.Actions;
 
 namespace Meta.EventArgs
 {

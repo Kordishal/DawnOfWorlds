@@ -8,5 +8,10 @@ namespace Model.Geo.Features.Terrain
         public string name;
         public string featureType;
         public string description;
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

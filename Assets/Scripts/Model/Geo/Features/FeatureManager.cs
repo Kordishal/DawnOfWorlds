@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using Model.Geo.Features.Climate;
 using Model.Geo.Features.Terrain;
-using Model.Powers.ShapeTerrain;
+using PowerSystems.Actions;
 using UnityEngine;
 
 namespace Model.Geo.Features
@@ -13,6 +13,7 @@ namespace Model.Geo.Features
         public static FeatureManager GetInstance() => _instance ?? (_instance = new FeatureManager());
         private const string WeatherEffectsFolder = "WeatherEffects";
         private const string TerrainFeaturesFolder = "TerrainFeatures";
+        private const string BiomesFolder = "Biomes";
         
         public IEnumerable<WeatherEffect> LoadWeatherEffects()
         {
@@ -22,6 +23,11 @@ namespace Model.Geo.Features
         public IEnumerable<TerrainFeatureAction> LoadTerrainFeatures()
         {
             return Resources.LoadAll<TerrainFeatureAction>(TerrainFeaturesFolder);
+        }
+
+        public IEnumerable<BiomeCreationAction> LoadBiomes()
+        {
+            return Resources.LoadAll<BiomeCreationAction>(BiomesFolder);
         }
     }
 }

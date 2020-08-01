@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using Model.Geo.Features.Terrain;
 using UnityEngine;
 
-namespace Model.Powers.ShapeTerrain
+namespace PowerSystems.Actions
 {
     [CreateAssetMenu(fileName = "terrainFeature", menuName = "ScriptableObjects/TerrainFeature", order = 2)]
-    public class TerrainFeatureAction : ScriptableObject
+    public class TerrainFeatureAction : ScriptableObject, IAction
     {
         public string objectName;
         public int cost;
@@ -15,6 +15,11 @@ namespace Model.Powers.ShapeTerrain
         public string description;
 
         public override string ToString()
+        {
+            return creationActionName;
+        }
+
+        public string GetName()
         {
             return creationActionName;
         }

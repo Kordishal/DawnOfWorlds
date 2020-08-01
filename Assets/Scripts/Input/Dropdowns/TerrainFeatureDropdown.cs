@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using Meta.EventArgs;
 using Model.Geo.Features;
 using Model.Geo.Organization;
-using Model.Powers.ShapeTerrain;
+using PowerSystems.Actions;
 using UnityEngine;
 using UnityEngine.UI;
 

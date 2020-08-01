@@ -3,15 +3,14 @@ using UnityEngine;
 
 namespace Model.Geo.Features.Terrain
 {
-    [CreateAssetMenu(fileName = "biome", menuName = "ScriptableObjects/Biome", order = 1)]
-    public class Biome : ScriptableObject
+    [Serializable]
+    public class Biome
     {
-        public string biomeName;
-        public string description;
-
+        public string name;
+        public BiomeCategory category;
         public override string ToString()
         {
-            return biomeName;
+            return name;
         }
     }
 }
